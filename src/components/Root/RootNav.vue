@@ -1,0 +1,42 @@
+<template>
+    <el-menu router :collapse="isCollapse" class=" h-full">
+
+        <el-scrollbar class=" h-screen">
+            <RootNavList :routesList="routesList" />
+        </el-scrollbar>
+
+    </el-menu>
+</template>
+
+<script setup lang="ts">
+import RootNavList from './RootNavList.vue';
+import { ref, computed } from "vue"
+import { useRoute, useRouter } from 'vue-router';
+import { Route, filterRoutes } from "@/hooks/routeTool/filtterRoutes"
+import RootBus from '@/hooks/routeTool/RootBus';
+
+
+const router = useRouter()
+const route = useRoute()
+
+const isCollapse = ref(RootBus.isCollapse)
+// 规则化获取路由
+
+const routesList: any = computed(() => {
+    return filterRoutes(router.options.routes as Route[])
+    return router.options.routes as Route[]
+})
+
+
+
+
+// 当前路由
+const currentPath = computed(() => {
+    return route.path
+})
+
+
+
+</script>
+
+<style lang="scss" scoped></style>
