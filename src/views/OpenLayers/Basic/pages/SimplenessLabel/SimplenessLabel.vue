@@ -4,9 +4,9 @@
   <div ref="popupCom" class="popup" v-show="shopPopup"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View, Feature } from 'ol'
 import Tile from 'ol/layer/Tile'
 import TileJSON from 'ol/source/TileJSON'
@@ -18,9 +18,9 @@ import Overlay from 'ol/Overlay'
 import 'ol/ol.css'
 import iconPng from '@/assets/map/icon.png' // 引入图标图片
 
-const store = useStore()
+const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map>()
 
 // 底图源
 const rasterLayer = new Tile({
@@ -66,9 +66,9 @@ let vectorLayer = new layerVecor({
 
 const shopPopup = ref(false)
 const popupCom = ref(null)
-const popup = ref(null)
+const popup = ref<Overlay>()
 
-function initMap () {
+function initMap() {
   // 地图实例
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
@@ -82,20 +82,22 @@ function initMap () {
   map.value.on('singleclick', e => {
     let elPopup = popupCom.value
     popup.value = new Overlay({
-      element: elPopup,
+      element: elPopup as any,
       positioning: 'bottom-center',
       stopEvent: false,
       offset: [0, -50]
     })
-    map.value.addOverlay(popup.value)
-    let feature = map.value.forEachFeatureAtPixel(e.pixel, feature => feature)
-    
+    map.value!.addOverlay(popup.value)
+    let feature = map.value!.forEachFeatureAtPixel(e.pixel, feature => feature)
+
     if (feature) {
       shopPopup.value = true
+      // @ts-ignore
       elPopup.innerHTML = feature.values_.name
+      // @ts-ignore
       let coordinates = feature.getGeometry().getCoordinates()
       setTimeout(() => {
-        popup.value.setPosition(coordinates)
+        popup.value!.setPosition(coordinates)
       }, 0)
     } else {
       shopPopup.value = false
@@ -105,7 +107,7 @@ function initMap () {
 
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/SimplenessLabel/SimplenessLabel.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/SimplenessLabel/SimplenessLabel.vue')
   initMap()
 })
 </script>

@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts/extension/bmap/bmap'
@@ -17,7 +17,13 @@ const store = useUserStore()
 
 const chartDom = ref(null)
 
-const data = [
+
+interface DataType {
+  name: string,
+  value: number
+}
+
+const data: DataType[] = [
   { name: '海门', value: 9 },
   { name: '鄂尔多斯', value: 12 },
   { name: '招远', value: 12 },
@@ -209,8 +215,11 @@ const data = [
   { name: '武汉', value: 273 },
   { name: '大庆', value: 279 }
 ]
+interface GeoCoordMap {
+  [key: string]: number[]; // 添加索引签名，表示可以包含任意其他属性
+}
 
-const geoCoordMap = {
+const geoCoordMap: GeoCoordMap = {
   '海门': [121.15, 31.89],
   '鄂尔多斯': [109.781327, 39.608266],
   '招远': [120.38, 37.35],
@@ -403,14 +412,16 @@ const geoCoordMap = {
   '大庆': [125.03, 46.58]
 }
 
-const convertData = function (data) {
+
+
+const convertData = function (data: DataType[]) {
   const res = []
   for (let i = 0; i < data.length; i++) {
-    const geoCoord = geoCoordMap[data[i].name]
+    const geoCoord = geoCoordMap[data[i].name];
     if (geoCoord) {
       res.push({
         name: data[i].name,
-        value: geoCoord.concat(data[i].value)
+        value: [...geoCoord, data[i].name]
       })
     }
   }
@@ -440,7 +451,7 @@ const options = {
       itemStyle: {
         color: '#005792'
       },
-      symbolSize: function (val) {
+      symbolSize: function (val: number[]) {
         return val[2] / 10
       },
       label: {
@@ -448,7 +459,7 @@ const options = {
         color: '#005792',
         position: 'right',
         // formatter: '{b}',
-        formatter: function (v) {
+        formatter: function (v: { data: { name: any; value: any[] } }) {
           return `${v.data.name} - ${v.data.value[2]}`
         }
       },
@@ -465,7 +476,7 @@ const options = {
       data: convertData(data.sort(function (a, b) {
         return b.value - a.value
       }).slice(0, 6)),
-      symbolSize: function (val) {
+      symbolSize: function (val: any) {
         return val[2] / 10
       },
       encode: {
@@ -473,7 +484,7 @@ const options = {
       },
       label: {
         // formatter: '{b}',
-        formatter: v => `${v.data.name} - ${v.data.value[2]}`,
+        formatter: (v: { data: { name: any; value: any[] } }) => `${v.data.name} - ${v.data.value[2]}`,
         position: 'right',
         show: true
       },

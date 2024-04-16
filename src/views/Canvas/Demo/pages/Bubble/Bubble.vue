@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import bubble from './index.ts'
 import { useUserStore } from "@/stroe/index.ts"

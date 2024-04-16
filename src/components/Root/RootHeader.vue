@@ -5,12 +5,10 @@
       isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     ]" @click="changeMenu"></i>
     <div class="root__header__main">
-      <h2 class="root__header__title" @click="toHome">前端可视化</h2>
+      <h2 class="root__header__title" @click="toHome">Front-end visualization</h2>
       <div class="repository__x">
-        <el-tooltip class="repository__item" content="码云仓库，欢迎 Star" placement="bottom" effect="light">
-          <!-- <a href="https://gitee.com/k21vin/front-end-data-visualization">
-            <i class="iconfont icon-gitee2"></i>
-          </a> -->
+        <el-tooltip class="repository__item" content="...." placement="bottom" effect="light">
+
         </el-tooltip>
       </div>
     </div>

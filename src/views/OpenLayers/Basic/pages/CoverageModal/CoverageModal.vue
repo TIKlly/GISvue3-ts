@@ -31,13 +31,13 @@ function initMap() {
     })
   })
 
-  osm.on('postrender', event => {
+  osm.on('postrender', (event: any) => {
     const ctx = event.context!;
     ctx!.save()
     const pixelRatio = event.frameState.pixelRatio;
     const size = map.value!.getSize();
     // 平移
-    ctx.translate(size[0] / 2 * pixelRatio, size[1] / 2 * pixelRatio);
+    ctx.translate(size![0] / 2 * pixelRatio, size![1] / 2 * pixelRatio);
     //缩放
     ctx.scale(3 * pixelRatio, 3 * pixelRatio);
     //平移
@@ -53,13 +53,18 @@ function initMap() {
     ctx.clip();
     ctx.translate(75, 80);
     ctx.scale(1 / 3 / pixelRatio, 1 / 3 / pixelRatio);
-    ctx.translate(-size[0] / 2 * pixelRatio, -size[1] / 2 * pixelRatio);
+    ctx.translate(-size![0] / 2 * pixelRatio, -size![1] / 2 * pixelRatio);
   })
 
-  osm.on('rendercomplete', function (event) {
+  // osm.on('rendercomplete', function (event: any) {
+  //   const ctx = event.context;
+  //   ctx.restore();
+  // });
+  osm.once('postrender', function (event: any) {
     const ctx = event.context;
     ctx.restore();
   });
+
 }
 
 onMounted(() => {

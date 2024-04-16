@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="260px">
+      <el-aside>
         <RootNav></RootNav>
       </el-aside>
 
@@ -9,7 +9,6 @@
         <el-header>
           <RootHeader></RootHeader>
         </el-header>
-
         <el-main class="h-ful">
           <RouterView></RouterView>
         </el-main>
@@ -22,6 +21,9 @@
 <script setup lang="ts">
 import RootNav from './components/Root/RootNav.vue';
 import RootHeader from "@/components/Root/RootHeader.vue"
+
+
+
 </script>
 
 <style></style>

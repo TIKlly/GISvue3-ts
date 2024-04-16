@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
@@ -24,7 +24,7 @@ import 'ol/ol.css'
 
 const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 const London = [-0.12755, 51.507222] // 伦敦
 const Moscow = [37.6178, 55.7517] // 莫斯科
@@ -55,19 +55,19 @@ function initMap() {
 
 // 顺时针
 function rotateLeft() {
-  let currentRotation = map.value.getView().getRotation()
-  map.value.getView().animate({ rotation: currentRotation + 1 })
+  let currentRotation = map.value!.getView().getRotation()
+  map.value!.getView().animate({ rotation: currentRotation + 1 })
 }
 
 // 逆时针
 function rotateRight() {
-  let currentRotation = map.value.getView().getRotation()
-  map.value.getView().animate({ rotation: currentRotation - 1 })
+  let currentRotation = map.value!.getView().getRotation()
+  map.value!.getView().animate({ rotation: currentRotation - 1 })
 }
 
 // 平移到伦敦
 function panToLondon() {
-  map.value.getView().animate({
+  map.value!.getView().animate({
     center: London, // 目标位置
     duration: 2000 // 动画时长
   })
@@ -75,7 +75,7 @@ function panToLondon() {
 
 // 弹性平移到莫斯科
 function elasticToMoscow() {
-  map.value.getView().animate({
+  map.value!.getView().animate({
     center: Moscow, // 目标位置
     easing: olEasing.easeOut // 动画: 传入动画函数，olEasing是内置动画集
   })
@@ -83,7 +83,7 @@ function elasticToMoscow() {
 
 // 弹跳平移到伊斯坦布尔
 function bounceToIstanbul() {
-  map.value.getView().animate({
+  map.value!.getView().animate({
     center: Istanbul,
     duration: 2000, // 动画时长
     easing: bounce // 动画：传入动画函数
@@ -92,25 +92,28 @@ function bounceToIstanbul() {
 
 // 旋转平移到罗马
 function spinToRome() {
-  let view = map.value.getView()
+  let view = map.value!.getView()
   let center = view.getCenter()
-  view.animate({ // 将多个动画连在一起使用
-    center: [
-      center[0] + (Rome[0] - center[0]) / 2,
-      center[1] + (Rome[1] - center[1]) / 2
-    ],
-    rotation: Math.PI,
-    easing: olEasing.easeIn
-  }, {
-    center: Rome,
-    rotation: 2 * Math.PI, // 旋转角度
-    easing: olEasing.easeOut
-  })
+  if (center) {
+    view.animate({ // 将多个动画连在一起使用
+      center: [
+        center[0] + (Rome[0] - center[0]) / 2,
+        center[1] + (Rome[1] - center[1]) / 2
+      ],
+      rotation: Math.PI,
+      easing: olEasing.easeIn
+    }, {
+      center: Rome,
+      rotation: 2 * Math.PI, // 旋转角度
+      easing: olEasing.easeOut
+    })
+  }
+
 }
 
 // 绕着罗马旋转
 function rotateAroundRome() {
-  let view = map.value.getView()
+  let view = map.value!.getView()
   let rotation = view.getRotation()
   view.animate({ // 将多个动画连在一起使用
     rotation: rotation + Math.PI,
@@ -125,35 +128,41 @@ function rotateAroundRome() {
 
 // 飞行到伯尔尼
 function flyToBern() {
-  let view = map.value.getView()
-  let duration = 2000
-  let zoom = view.getZoom()
-  let parts = 2
-  let called = false
-  function callback(complete) {
-    --parts;
-    if (called) {
-      return
+  const view = map.value!.getView();
+  const duration = 2000;
+  const zoom = view.getZoom();
+  let parts = 1;
+  // @ts-ignore
+  let called
+  const callback = (complete: any) => {
+    if (--parts === 0 || !complete) {
+      called = true;
     }
-    if (parts === 0 || !complete) {
-      called = true
-    }
-  }
-  view.animate({
-    center: Bern,
-    duration: duration
-  }, callback);
-  view.animate({
-    zoom: zoom - 1,
-    duration: duration / 2
-  }, {
-    zoom: zoom,
-    duration: duration / 2
-  }, callback)
+  };
+
+  view.animate(
+    {
+      center: Bern,
+      duration: duration
+    },
+    callback
+  );
+
+  view.animate(
+    {
+      zoom: zoom! - 1,
+      duration: duration / 2
+    },
+    {
+      zoom: zoom,
+      duration: duration / 2
+    },
+    callback
+  );
 }
 
 // 弹跳动画
-function bounce(t) {
+function bounce(t: number) {
   let s = 7.5625;
   let p = 2.75;
   let l;
@@ -196,4 +205,4 @@ onMounted(() => {
     margin: 0 10px;
   }
 }
-</style>
+</style>: any: number

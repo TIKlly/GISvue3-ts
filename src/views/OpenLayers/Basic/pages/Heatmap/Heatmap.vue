@@ -1,4 +1,4 @@
-<!-- ol - 热力图 -->
+<!-- ol - 热力图
 <template>
   <div id="map" class="map__x" ref="map"></div>
 
@@ -95,4 +95,4 @@ onMounted(() => {
   height: 600px;
   border: 1px solid #eee;
 }
-</style>
+</style> -->

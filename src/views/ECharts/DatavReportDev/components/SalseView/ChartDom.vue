@@ -16,7 +16,7 @@ const chartDom = ref(null)
 // 渲染函数
 function chartInit() {
   const chart = echarts.init(chartDom.value)
-  chart.setOption(props.options)
+  chart.setOption(props.options as any)
 }
 
 onMounted(() => {
@@ -24,6 +24,4 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

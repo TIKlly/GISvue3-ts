@@ -1,10 +1,9 @@
 <template>
-    <el-menu router :collapse="isCollapse" class=" h-full">
-
+    <el-menu router :collapse="isCollapse" class=" h-full" :default-active="currentPath" @open="handleOpen"
+        @close="handleClose">
         <el-scrollbar class=" h-screen">
             <RootNavList :routesList="routesList" />
         </el-scrollbar>
-
     </el-menu>
 </template>
 
@@ -24,7 +23,7 @@ const isCollapse = ref(RootBus.isCollapse)
 
 const routesList: any = computed(() => {
     return filterRoutes(router.options.routes as Route[])
-    return router.options.routes as Route[]
+    // return router.options.routes as Route[]
 })
 
 
@@ -35,7 +34,12 @@ const currentPath = computed(() => {
     return route.path
 })
 
-
+const handleOpen = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+    console.log(key, keyPath)
+}
 
 </script>
 

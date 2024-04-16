@@ -3,7 +3,7 @@
   <div id="map" class="map__x"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
@@ -17,7 +17,7 @@ import 'ol/ol.css'
 
 const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map>()
 
 function initMap() {
   // 地图实例

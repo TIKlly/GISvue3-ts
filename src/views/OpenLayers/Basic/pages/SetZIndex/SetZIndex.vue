@@ -1,21 +1,20 @@
-<!-- ol - 控制图层层叠关系 -->
 <template>
   <div id="map" class="map__x"></div>
-  <label for="idx1">
-    <input type="number" v-model="squareZIndex" />
+  <label for="squareZIndex">
+    <input id="squareZIndex" type="number" v-model="squareZIndex" />
     方块所在图层的 Z-index
   </label>
-  <label for="idx1">
-    <input type="number" v-model="triangleZIndex" />
+  <label for="triangleZIndex">
+    <input id="triangleZIndex" type="number" v-model="triangleZIndex" />
     三角形所在图层的 Z-index
   </label>
-  <label for="idx1">
-    <input type="number" v-model="starZIndex" />
+  <label for="starZIndex">
+    <input id="starZIndex" type="number" v-model="starZIndex" />
     星形所在图层的 Z-index
   </label>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, reactive, watch, onMounted } from 'vue'
 import { useUserStore } from '@/stroe'
 import { Map, View, Feature } from 'ol'
@@ -31,11 +30,11 @@ const squareZIndex = ref(1)
 const triangleZIndex = ref(0)
 const starZIndex = ref(0)
 
-const layer0 = ref(null)
-const layer1 = ref(null)
-const layer2 = ref(null)
+const layer0 = ref(undefined)
+const layer1 = ref(undefined)
+const layer2 = ref(undefined)
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 const styles = reactive({
   square: new Style({
@@ -64,26 +63,30 @@ const styles = reactive({
       points: 5,
       radius: 80,
       radius2: 4,
-      angle: 0
+      angle: 0.5
     })
   })
 })
 
-watch([starZIndex, squareZIndex, triangleZIndex], ([star, square, triangle], [prevStar, prevSquare, prevTriangle]) => {
+watch([starZIndex, squareZIndex, triangleZIndex], ([star, square, triangle], [,]) => {
 
   // // 星形所在图层的 Z-index
-  layer0.value.setZIndex(parseInt(star, 10) || 0)
+  // @ts-ignore
+  layer0.value!.setZIndex(parseInt(star as any, 10) || 0)
 
   // 方块所在图层的 Z-index
-  layer1.value.setZIndex(parseInt(square, 10) || 0)
+  // @ts-ignore
+  layer1.value!.setZIndex(parseInt(square as any, 10) || 0)
 
   // 三角形所在图层的 Z-index
-  layer2.value.setZIndex(parseInt(triangle, 10) || 0)
+  // @ts-ignore
+  layer2.value!.setZIndex(parseInt(triangle as any, 10) || 0)
 })
 
 function initMap() {
-  layer0.value = createLayer([40, 40], styles['star'], starZIndex.value)
-  layer1.value = createLayer([0, 0], styles['square'], squareZIndex.value)
+  // @ts-ignore
+  layer0.value = createLayer([40, 40], styles['star'], starZIndex.value)// @ts-ignore
+  layer1.value = createLayer([0, 0], styles['square'], squareZIndex.value)// @ts-ignore
   layer2.value = createLayer([0, 40], styles['triangle'], triangleZIndex.value)
 
   console.log(layer0.value)
@@ -92,7 +95,7 @@ function initMap() {
 
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
+    target: 'map',// @ts-ignore // 对应页面里 id 为 map 的元素
     layers,
     view: new View({
       center: [0, 0],
@@ -102,7 +105,7 @@ function initMap() {
 }
 
 // 绘制图形
-function createLayer(coordinates, style, zIndex) {
+function createLayer(coordinates: number[], style: Style, zIndex: number) {
   let feature = new Feature(new Point(coordinates))
   feature.setStyle(style)
 

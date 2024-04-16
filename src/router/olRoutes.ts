@@ -253,15 +253,15 @@ export default {
             navName: '切换图源'
           }
         },
-        {
-          path: 'ol-simplenessLabel',
-          name: 'olSimplenessLabel',
-          component: () => import('@/views/OpenLayers/Basic/pages/SimplenessLabel/SimplenessLabel.vue'),
-          meta: {
-            navState: true,
-            navName: '简单的标记'
-          }
-        },
+        // {
+        //   path: 'ol-simplenessLabel',
+        //   name: 'olSimplenessLabel',
+        //   component: () => import('@/views/OpenLayers/Basic/pages/SimplenessLabel/SimplenessLabel.vue'),
+        //   meta: {
+        //     navState: true,
+        //     navName: '简单的标记'
+        //   }
+        // },
         {
           path: 'ol-brightMark',
           name: 'olBrightMark',
@@ -316,15 +316,15 @@ export default {
             navName: '带箭头的线段'
           }
         },
-        {
-          path: 'ol-snapGraph',
-          name: 'olSnapGraph',
-          component: () => import('@/views/OpenLayers/Basic/pages/SnapGraph/SnapGraph.vue'),
-          meta: {
-            navState: true,
-            navName: '修改已绘制的图形'
-          }
-        }
+        // {
+        //   path: 'ol-snapGraph',
+        //   name: 'olSnapGraph',
+        //   component: () => import('@/views/OpenLayers/Basic/pages/SnapGraph/SnapGraph.vue'),
+        //   meta: {
+        //     navState: true,
+        //     navName: '修改已绘制的图形'
+        //   }
+        // }
       ]
     }
   ]

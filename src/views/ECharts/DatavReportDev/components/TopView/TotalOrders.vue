@@ -1,10 +1,7 @@
 <!-- 累计订单量 -->
 <template>
   <div>
-    <CommonCard
-      title="累计订单量"
-      value="2,157,420"
-    >
+    <CommonCard title="累计订单量" value="2,157,420">
       <template #default>
         <div ref="chartDom" :style="{ width: '100%', height: '100%' }"></div>
       </template>
@@ -19,10 +16,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CommonCard, echarts } from './commonCardMixin.js'
+import { EChartsType } from 'echarts';
 
 // echart 元素容器
 const chartDom = ref(null)
-const chart = ref(null)
+const chart = ref<EChartsType | undefined>(undefined)
 
 function chartInit() {
   chart.value = echarts.init(chartDom.value)
@@ -41,7 +39,7 @@ function chartInit() {
         data: [620, 432, 220, 534, 790, 430, 220, 320, 532, 320, 834, 690, 530, 220, 620],
         areaStyle: { // 用面积的方式进行展示
           color: new echarts.graphic.LinearGradient(
-            0, 0, 0, 1, 
+            0, 0, 0, 1,
             [
               { offset: 0, color: "rgba(255, 191, 0, 1)" },
               { offset: 1, color: "rgba(255, 191, 0, 0.1)" }

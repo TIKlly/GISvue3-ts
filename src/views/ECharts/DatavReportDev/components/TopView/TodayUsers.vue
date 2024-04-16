@@ -1,10 +1,7 @@
 <!-- 今日交易用户 -->
 <template>
   <div>
-    <CommonCard
-      title="今日交易用户数"
-      value="81,014"
-    >
+    <CommonCard title="今日交易用户数" value="81,014">
       <template #default>
         <div ref="chartDom" :style="{ width: '100%', height: '100%' }"></div>
       </template>
@@ -19,11 +16,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CommonCard, echarts } from './commonCardMixin.js'
+import { EChartsType } from 'echarts';
 
 
 // echart 元素容器
 const chartDom = ref(null)
-const chart = ref(null)
+const chart = ref<EChartsType | undefined>(undefined)
 
 function chartInit() {
   chart.value = echarts.init(chartDom.value)

@@ -77,16 +77,16 @@ const visible = reactive({
 
 // 显示/隐藏图层
 // setVisible可以设置图层显示或隐藏
-function changeCheckBox(target: string | number, name: any) {
-  let layers = find(map.value, name)
+function changeCheckBox(target: keyof typeof visible, name: any) {
+  let layers = find(map.value!, name)
   layers.setVisible(visible[target])
 }
 
 // 修改图层透明度
 // setOpacity可是设置图层的透明度，接收一个数值类型的参数
-function changeOpacity(target: string | number, name: any) {
-  let layers = find(map.value, name)
-  layers.setOpacity(parseFloat(visible[target]))
+function changeOpacity(target: keyof typeof visible, name: any) {
+  let layers = find(map.value!, name)
+  layers.setOpacity(parseFloat(visible[target] as any))
 }
 
 // 查找图层
@@ -109,22 +109,18 @@ function initMap() {
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
     layers: [ // 图层
-      new Tile({
-        name: 'baseMap',
-        source: new OSM()
+      new Tile({ // 创建基本地图图层
+        source: new OSM() // 使用 OpenStreetMap 数据源
       }),
-      new Group({
-        name: 'group',
-        layers: [
-          new Tile({
-            name: 'food',
+      new Group({ // 创建图层组
+        layers: [ // 图层组包含的图层
+          new Tile({ // 食物危机主题图层
             source: new TileJSON({
               url: 'https://api.tiles.mapbox.com/v4/mapbox.20110804-hoa-foodinsecurity-3month.json?securee&access_token=pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiY2pzbmg0Nmk5MGF5NzQzbzRnbDNoeHJrbiJ9.7_-_gL8ur7ZtEiNwRfCy7Q',
               crossOrigin: 'anonymous'
             })
           }),
-          new Tile({
-            name: 'land',
+          new Tile({ // 世界陆地边界图层
             source: new TileJSON({
               url: 'https://api.tiles.mapbox.com/v4/mapbox.world-borders-light.json?secure&access_token=pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiY2pzbmg0Nmk5MGF5NzQzbzRnbDNoeHJrbiJ9.7_-_gL8ur7ZtEiNwRfCy7Q',
               crossOrigin: 'anonymous'
@@ -140,6 +136,7 @@ function initMap() {
     })
   })
 }
+
 
 onMounted(() => {
   store.setComponentPath('src/views/OpenLayers/Basic/pages/LayerGroup/LayerGroup.vue')
@@ -161,4 +158,4 @@ onMounted(() => {
     position: static;
   }
 }
-</style>: string | number: any: { getLayers: () => any } | null: any
+</style>

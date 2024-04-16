@@ -1,4 +1,3 @@
-<!-- ol - 弹窗 -->
 <template>
   <div id="map" class="map__x" ref="mapCom"></div>
   <div ref="popupCom" class="popup">
@@ -8,46 +7,37 @@
 </template>
 
 <script setup lang="ts">
-/**
- * @作者 羊一止
- * @本例讲解 https://juejin.cn/post/7008372799441993742/
- */
 import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
-import XYZ from 'ol/source/XYZ' // 引入XYZ地图格式
+import XYZ from 'ol/source/XYZ'
 import Overlay from 'ol/Overlay'
 import 'ol/ol.css'
 
-// 本例用到 Overlay.setPosition
-// Overlay.setPosition文档：https://openlayers.org/en/latest/apidoc/module-ol_Overlay-Overlay.html#setPosition
-
 const store = useUserStore()
 
-// 地图容器
-const mapCom = ref(null)
-
-// 弹窗容器
-const popupCom = ref<HTMLElement | undefined>(undefined)
-
-const map = ref<Map | undefined>(undefined) // 地图实例
-const currentCoordinate = ref('') // 弹窗信息
-
-const overlay = ref<Overlay | undefined>(undefined)
+const mapCom = ref<HTMLDivElement | null>(null)
+const popupCom = ref<HTMLDivElement | null>(null)
+const map = ref<Map>()
+const currentCoordinate = ref<string>('')
+const overlay = ref<Overlay>()
 
 function initMap() {
+  if (!mapCom.value || !popupCom.value) return
+
   overlay.value = new Overlay({
-    element: popupCom.value, // 弹窗标签，在html里
-    autoPan: true, // 如果弹窗在底图边缘时，底图会移动
-    autoPanAnimation: { // 底图移动动画
+    element: popupCom.value,
+    autoPan: true, // @ts-ignore
+    autoPanAnimation: {
       duration: 250
     }
   })
+
   map.value = new Map({
     target: mapCom.value,
     layers: [
-      new Tile({
+      new Tile({// @ts-ignore
         name: 'defaultLayer',
         source: new XYZ({
           url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}'
@@ -57,7 +47,7 @@ function initMap() {
     view: new View({
       projection: 'EPSG:4326',
       center: [109.51, 18.25],
-      zoom: 12 // 地图缩放级别（打开页面时默认级别）
+      zoom: 12
     }),
     overlays: [overlay.value]
   })
@@ -65,18 +55,18 @@ function initMap() {
   mapClick()
 }
 
-// 点击地图
 function mapClick() {
+  if (!map.value) return
+
   map.value.on('singleclick', evt => {
-    const coordinate = evt.coordinate // 获取坐标
-    currentCoordinate.value = coordinate // 保存坐标点
-    overlay.value.setPosition(coordinate)
+    const coordinate = evt.coordinate
+    currentCoordinate.value = coordinate.toString()
+    overlay.value!.setPosition(coordinate)
   })
 }
 
-// 关闭弹窗
 function closePopup() {
-  overlay.value.setPosition(undefined) // setPosition 传入undefined会隐藏弹窗元素
+  overlay.value!.setPosition(undefined)
   currentCoordinate.value = ''
 }
 

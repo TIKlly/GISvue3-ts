@@ -10,7 +10,7 @@ import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import { OSM } from 'ol/source'
 import * as control from 'ol/control'
-import * as olInteraction from 'ol/interaction';
+// import * as olInteraction from 'ol/interaction';
 import 'ol/ol.css'
 
 const store = useUserStore()

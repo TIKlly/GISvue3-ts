@@ -2,11 +2,11 @@
 <template>
   <div id="map" class="map__x"></div>
   <select id="type" v-model="tool" @change="addInteraction">
-    <option v-for="item in tools" :key="item.value" :value="item.value">{{item.label}}</option>
+    <option v-for="item in tools" :key="item.value" :value="item.value">{{ item.label }}</option>
   </select>
 </template>
 
-<script setup>
+<script setup lang="">
 import { ref, reactive, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { Map, View } from 'ol'
@@ -14,7 +14,7 @@ import Tile from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
 import LayerVector from 'ol/layer/Vector'
 import SourceVector from 'ol/source/Vector'
-import { Draw, Modify, Snap} from 'ol/interaction'
+import { Draw, Modify, Snap } from 'ol/interaction'
 import { Style, Fill, Stroke, Circle } from 'ol/style'
 import 'ol/ol.css'
 
@@ -79,14 +79,14 @@ const modify = new Modify({
 
 const map = ref(null)
 
-function initMap () {
+function initMap() {
   // 地图实例
-  map.value = new Map({ 
+  map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
     layers: [raster, vector],
     view: new View({
       projection: "EPSG:4326",
-      center: [115.543045,45.16871],
+      center: [115.543045, 45.16871],
       zoom: 10
     })
   })
@@ -112,7 +112,7 @@ function addInteraction() {
     })
     map.value.addInteraction(draw.value)
 
-    snap.value = new Snap({source})
+    snap.value = new Snap({ source })
   }
 }
 

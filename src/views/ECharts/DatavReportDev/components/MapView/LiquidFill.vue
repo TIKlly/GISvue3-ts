@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-liquidfill' // 引入水球图插件

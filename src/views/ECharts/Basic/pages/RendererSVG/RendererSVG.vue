@@ -3,7 +3,7 @@
     <div id="chart" class="chart" ref="chartDom"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
 import { useUserStore } from '@/stroe/index.ts'

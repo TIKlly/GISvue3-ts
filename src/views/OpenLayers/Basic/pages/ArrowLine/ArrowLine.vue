@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
@@ -18,10 +18,11 @@ import 'ol/ol.css'
 
 // 箭头图片
 import arrowPng from '@/assets/map/arrow.png'
+import { Coordinate } from 'ol/coordinate'
 
-const store = useStore()
+const store = useUserStore()
 
-function styleFunction(feature) {
+function styleFunction(feature: { getGeometry: () => any }) {
   let geometry = feature.getGeometry()
   let styles = [
     new Style({
@@ -32,7 +33,7 @@ function styleFunction(feature) {
     })
   ]
 
-  geometry.forEachSegment((start, end) => {
+  geometry.forEachSegment((start: number[], end: Coordinate) => {
     let dx = end[0] - start[0]
     let dy = end[1] - start[1]
     let rotation = Math.atan2(dy, dx)
@@ -62,7 +63,7 @@ const vector = new LayerVector({
   style: styleFunction
 })
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 function initMap() {
   // 地图实例
@@ -84,7 +85,7 @@ function initMap() {
 }
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/ArrowLine/ArrowLine.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/ArrowLine/ArrowLine.vue')
   initMap()
 })
 </script>

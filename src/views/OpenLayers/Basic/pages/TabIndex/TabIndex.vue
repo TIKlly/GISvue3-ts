@@ -9,7 +9,7 @@
   <div class="occupied"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * @作者 羊一止
  * @本例讲解 https://juejin.cn/post/7008808627326681101/
@@ -23,7 +23,7 @@ import 'ol/ol.css'
 
 const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 function initMap() {
   map.value = new Map({

@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 /**
  * @作者 羊一止
  * @本例讲解 https://juejin.cn/post/7008444700398977061
@@ -26,7 +26,7 @@ import 'ol/ol.css'
 
 const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 const zoom = 12 // 初始化zoom
 const minZoom = 10 // 最小zoom
@@ -62,16 +62,16 @@ const currentZoom = computed(() => {
 
 // 放大1级
 function zoomIn() {
-  let view = map.value.getView() // 获取当前视图
-  let zoom = view.getZoom() // 获取当前缩放级别
-  view.setZoom(zoom + 1)
+  const view = map.value!.getView() // 获取当前视图
+  const zoom = view.getZoom() // 获取当前缩放级别
+  view.setZoom(zoom! + 1)
 }
 
 // 缩小1级
 function zoomOut() {
-  let view = map.value.getView() // 获取当前视图
+  let view = map.value!.getView() // 获取当前视图
   let zoom = view.getZoom() // 获取当前缩放级别
-  view.setZoom(zoom - 1)
+  view.setZoom(zoom! - 1)
 }
 
 onMounted(() => {

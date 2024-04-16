@@ -1,10 +1,7 @@
 <!-- 累计用户数 -->
 <template>
   <div>
-    <CommonCard
-      title="累计用户数"
-      value="1,087,503"
-    >
+    <CommonCard title="累计用户数" value="1,087,503">
       <template #default>
         <div ref="chartDom" :style="{ width: '100%', height: '100%' }"></div>
       </template>
@@ -26,10 +23,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { CommonCard, echarts } from './commonCardMixin.js'
+import { EChartsType } from 'echarts';
 
 // echart 元素容器
 const chartDom = ref(null)
-const chart = ref(null)
+const chart = ref<EChartsType | undefined>(undefined)
 
 function chartInit() {
   chart.value = echarts.init(chartDom.value)
@@ -73,12 +71,11 @@ function chartInit() {
         type: 'custom',
         data: [100],
         stack: '重量',
-        renderItem: (params, api) => {
-          // console.log(params, api)
+        renderItem: (params: any, api: { value: (arg0: number) => any; coord: (arg0: any[]) => any; }) => {
+          console.log(params, api)
           const value = api.value(0) // 获取第一个元素的值
           const endPoint = api.coord([value, 0]) // 获取第一个元素的坐标系(第一个参数是x轴，第二个参数是y轴，这个案例的y轴是0)
           // console.log(endPoint)
-
           return {
             type: 'group', // 组
             position: endPoint,
@@ -173,4 +170,4 @@ onMounted(() => {
     margin-left: 20px;
   }
 }
-</style>
+</style>: any: { value: (arg0: number) => any; coord: (arg0: any[]) => any; }

@@ -5,7 +5,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View, Feature } from 'ol'
 import Point from 'ol/geom/Point'
 import * as style from 'ol/style'
@@ -17,7 +17,7 @@ import 'ol/ol.css'
 
 import dotPng from '@/assets/map/dot.png'
 
-const store = useStore()
+const store = useUserStore()
 
 // 罗马
 let rome = new Feature({
@@ -69,20 +69,20 @@ let vectorLayer = new layerVecor({
   source: vectorSource
 })
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 let rasterLayer = new Tile({
   source: new TileJSON({
     url: 'https://api.tiles.mapbox.com/v4/mapbox.world-light.json?secure&access_token=pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiY2pzbmg0Nmk5MGF5NzQzbzRnbDNoeHJrbiJ9.7_-_gL8ur7ZtEiNwRfCy7Q',
     crossOrigin: 'anonymous'
-  }) 
+  })
 })
 
-function initMap () {
+function initMap() {
   // 地图实例
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ rasterLayer, vectorLayer ],
+    layers: [rasterLayer, vectorLayer],
     view: new View({ // 地图视图
       projection: "EPSG:4326",
       center: [0, 0],
@@ -92,7 +92,7 @@ function initMap () {
 }
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/BrightMark/BrightMark.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/BrightMark/BrightMark.vue')
   initMap()
 })
 </script>

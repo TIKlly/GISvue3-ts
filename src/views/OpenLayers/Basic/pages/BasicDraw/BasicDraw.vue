@@ -2,13 +2,13 @@
 <template>
   <div id="map" class="map__x"></div>
   <select id="type" v-model="tool" @change="addInteraction">
-    <option v-for="item in tools" :key="item.value" :value="item.value">{{item.label}}</option>
+    <option v-for="item in tools" :key="item.value" :value="item.value">{{ item.label }}</option>
   </select>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
@@ -17,7 +17,7 @@ import SourceVector from 'ol/source/Vector'
 import Draw from 'ol/interaction/Draw'
 import 'ol/ol.css'
 
-const store = useStore()
+const store = useUserStore()
 
 const tool = ref('Polygon')
 const tools = reactive([ // 工具集
@@ -57,9 +57,9 @@ const raster = new Tile({
   source: new OSM()
 })
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
-function initMap () {
+function initMap() {
   // 地图实例
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
@@ -74,24 +74,23 @@ function initMap () {
 }
 
 
-const draw = ref(null)
+const draw = ref<Draw | undefined>(undefined)
 
 function addInteraction() {
   if (draw.value != null) {
-    map.value.removeInteraction(draw.value)
+    map.value!.removeInteraction(draw.value as Draw)
   }
-
   if (tool.value != 'None') {
     draw.value = new Draw({
       source: source,
-      type: tool.value
+      type: tool.value as any
     })
-    map.value.addInteraction(draw.value)
+    map.value!.addInteraction(draw.value as any)
   }
 }
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/BasicDraw/BasicDraw.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/BasicDraw/BasicDraw.vue')
   initMap()
 })
 </script>

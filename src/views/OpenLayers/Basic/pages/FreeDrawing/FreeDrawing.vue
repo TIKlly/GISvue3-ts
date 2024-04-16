@@ -2,13 +2,13 @@
 <template>
   <div id="map" class="map__x"></div>
   <select id="type" v-model="tool" @change="addInteraction">
-    <option v-for="item in tools" :key="item.value" :value="item.value">{{item.label}}</option>
+    <option v-for="item in tools" :key="item.value" :value="item.value">{{ item.label }}</option>
   </select>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
@@ -17,7 +17,7 @@ import SourceVector from 'ol/source/Vector'
 import Draw from 'ol/interaction/Draw'
 import 'ol/ol.css'
 
-const store = useStore()
+const store = useUserStore()
 
 const tool = ref('Polygon')
 const tools = reactive([ // 工具集
@@ -53,9 +53,9 @@ const vector = new LayerVector({
 })
 
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
-function initMap () {
+function initMap() {
   // 地图实例
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
@@ -70,24 +70,41 @@ function initMap () {
   addInteraction()
 }
 
-const draw = ref(null)
+const draw = ref<Draw | undefined>(undefined)
+enum DrawType {
+  Point = 'Point',
+  LineString = 'LineString',
+  Polygon = 'Polygon',
+  Circle = 'Circle',
+  // 可以根据需要添加其他绘制类型
+}
 
 function addInteraction() {
-  if (draw.value !== null) {
-    map.value.removeInteraction(draw.value)
-  }
-  if (tool.value !== 'None') {
-    draw.value = new Draw({
-      source: source,
-      type: tool.value,
-      freehand: true
-    })
-    map.value.addInteraction(draw.value)
+  if (map.value) {
+    if (draw.value !== null) {
+      map.value.removeInteraction(draw.value as any)
+    }
+    if (tool.value !== 'None') {
+      let type: DrawType;
+      if (tool.value === 'Point' || tool.value === 'LineString' || tool.value === 'Polygon' || tool.value === 'Circle') {
+        type = tool.value as DrawType; // 将字符串转换为枚举类型
+      } else {
+        type = DrawType.Point; // 默认绘制类型
+      }
+
+      draw.value = new Draw({
+        source: source,
+        type: type,
+        freehand: true
+      })
+      map.value.addInteraction(draw.value as any)
+    }
   }
 }
 
+
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/FreeDrawing/FreeDrawing.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/FreeDrawing/FreeDrawing.vue')
   initMap()
 })
 </script>

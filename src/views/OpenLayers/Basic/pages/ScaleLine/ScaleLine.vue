@@ -67,7 +67,7 @@ function initMap() {
       zoom: 12 // 地图缩放级别（打开页面时默认级别）
     }),
     controls: control.defaults().extend([
-      scaleLineControl.value // 比例尺
+      scaleLineControl.value as any// 比例尺
     ])
   })
 
@@ -81,7 +81,9 @@ function setScaleLine() {
     return item.t === scaleplate.value
   })
   // 设置单位，注意unit.v的值，必须使用这些值
-  scaleLineControl.value!.setUnits(unit.v)
+  if (unit) {
+    scaleLineControl.value!.setUnits(unit.v as any)
+  }
 }
 
 onMounted(() => {

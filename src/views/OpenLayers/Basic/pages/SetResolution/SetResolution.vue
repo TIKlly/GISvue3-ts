@@ -9,15 +9,15 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import { OSM, TileJSON } from 'ol/source'
 import 'ol/ol.css'
 
-const store = useStore()
+const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 function initMap() {
   map.value = new Map({
@@ -45,7 +45,7 @@ function initMap() {
 }
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/SetResolution/SetResolution.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/SetResolution/SetResolution.vue')
   initMap()
 })
 </script>

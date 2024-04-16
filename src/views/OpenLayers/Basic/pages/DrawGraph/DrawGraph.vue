@@ -2,23 +2,23 @@
 <template>
   <div id="map" class="map__x"></div>
   <select id="type" v-model="tool" @change="addInteraction">
-    <option v-for="item in tools" :key="item.value" :value="item.value">{{item.label}}</option>
+    <option v-for="item in tools" :key="item.value" :value="item.value">{{ item.label }}</option>
   </select>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from 'vue'
-import { useStore } from 'vuex'
+import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
 import Tile from 'ol/layer/Tile'
 import OSM from 'ol/source/OSM'
 import LayerVector from 'ol/layer/Vector'
 import SourceVector from 'ol/source/Vector'
-import Draw, {createRegularPolygon, createBox} from 'ol/interaction/Draw'
+import Draw, { createRegularPolygon, createBox } from 'ol/interaction/Draw'
 import Polygon from 'ol/geom/Polygon'
 import 'ol/ol.css'
 
-const store = useStore()
+const store = useUserStore()
 
 const tool = ref('Hexagram')
 const tools = reactive([ // 工具集
@@ -44,7 +44,7 @@ const tools = reactive([ // 工具集
   }
 ])
 
-const map = ref(null)
+const map = ref<Map | undefined>(undefined)
 
 // 底图
 const raster = new Tile({
@@ -59,7 +59,7 @@ const vector = new LayerVector({
   source: source
 })
 
-function initMap () {
+function initMap() {
   // 地图实例
   map.value = new Map({
     target: 'map', // 对应页面里 id 为 map 的元素
@@ -74,16 +74,17 @@ function initMap () {
   addInteraction()
 }
 
-const draw = ref(null)
+const draw = ref<Draw | undefined>(undefined)
 
 function addInteraction() {
   if (draw.value !== null) {
-    map.value.removeInteraction(draw.value)
+    map.value!.removeInteraction(draw.value as Draw)
   }
   if (tool.value !== 'None') {
+    // @ts-ignore
     let geometryFunction
     let type = 'Circle'
-    
+
     if (tool.value === 'Square') {
       // 方形
       geometryFunction = createRegularPolygon(4)
@@ -91,7 +92,7 @@ function addInteraction() {
       // 矩形
       geometryFunction = createBox()
     } else if (tool.value === 'Hexagram') {
-      geometryFunction = function (coordinates, geometry) {
+      geometryFunction = function (coordinates: any[], geometry: Polygon) {
         //中心点
         var center = coordinates[0];
         //鼠标点击的另一个点
@@ -113,7 +114,7 @@ function addInteraction() {
           var fraction = i % 2 === 0 ? 1 : 0.58;
           //计算顶点的坐标
           var offsetX = radius * fraction * Math.cos(angle);
-          var offsetY = radius * fraction * Math.sin(angle);							
+          var offsetY = radius * fraction * Math.sin(angle);
           newCoordinates.push([center[0] + offsetX, center[1] + offsetY]);
         }
         newCoordinates.push(newCoordinates[0].slice());
@@ -128,15 +129,15 @@ function addInteraction() {
 
     draw.value = new Draw({
       source: source,
-      type,
-      geometryFunction
+      type: type as any,
+      geometryFunction: type as any
     })
-    map.value.addInteraction(draw.value)
+    map.value!.addInteraction(draw.value as Draw)
   }
 }
 
 onMounted(() => {
-  store.commit('setComponentPath', 'src/views/OpenLayers/Basic/pages/DrawGraph/DrawGraph.vue')
+  store.setComponentPath('src/views/OpenLayers/Basic/pages/DrawGraph/DrawGraph.vue')
   initMap()
 })
 </script>

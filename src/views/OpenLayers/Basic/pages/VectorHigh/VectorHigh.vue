@@ -1,10 +1,10 @@
-<!-- ol - 矢量图高亮模块 -->
+ol - 矢量图高亮模块
 <template>
   <div id="map" class="map__x"></div>
   <div>{{ info }}</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/stroe'
 import { Map, View } from 'ol'
@@ -15,13 +15,13 @@ import GeoJSON from 'ol/format/GeoJSON'
 import CN from '@/assets/map/MapOfChina.json' // 矢量图（中国版）
 import 'ol/ol.css'
 
-import { throttle, debounce } from "@/util/throttle"
+import { debounce } from "@/util/throttle"
 
 // 矢量图数据生成网站：https://datav.aliyun.com/tools/atlas/index.html
 
 const store = useUserStore()
 
-const map = ref(null)
+const map = ref<Map>()
 
 function initMap() {
   let style = new Style({
@@ -56,7 +56,7 @@ function initMap() {
           })
         }),
         style: feature => {
-          style.getText().setText(feature.get('name'))
+          style.getText()!.setText(feature.get('name'))
           return style
         }
       })
@@ -67,11 +67,12 @@ function initMap() {
       zoom: 4 // 地图缩放级别（打开页面时默认级别）
     })
   })
-
+  // @ts-ignore
   map.value.on('pointermove', debounce(evt => {
     if (evt.dragging) { // 拖拽
       return
     }
+    // @ts-ignore
     let pixel = map.value.getEventPixel(evt.originalEvent) // 鼠标在容器的坐标(左上角是[0,0])
     displayFeatureInfo(pixel)
   }, 100))
@@ -102,18 +103,18 @@ const highlight = ref(null)
 const info = ref('')
 
 // 高亮
-function displayFeatureInfo(pixel) {
-  if (!featureOverlay.value) {
+function displayFeatureInfo(pixel: any) {
+  if (!featureOverlay.value) {// @ts-ignore
     featureOverlay.value = new LayerVector({
-      source: new SourceVector(),
+      source: new SourceVector(),// @ts-ignore
       map: map.value,
-      style: feature => {
+      style: feature => {// @ts-ignore
         highlightStyle.getText().setText(feature.get('name'))
         return highlightStyle
       }
     })
   }
-
+  // @ts-ignore
   let feature = map.value.forEachFeatureAtPixel(pixel, feature => feature)
 
   if (feature) {
@@ -125,11 +126,14 @@ function displayFeatureInfo(pixel) {
 
   if (feature !== highlight.value) {
     if (highlight.value) {
+      // @ts-ignore
       featureOverlay.value.getSource().removeFeature(highlight.value)
     }
     if (feature) {
+      // @ts-ignore
       featureOverlay.value.getSource().addFeature(feature)
     }
+    // @ts-ignore
     highlight.value = feature
   }
 }
@@ -146,4 +150,4 @@ onMounted(() => {
   height: 600px;
   border: 1px solid #eee;
 }
-</style>
+</style>(: { dragging: any; originalEvent: any }): any(: any)

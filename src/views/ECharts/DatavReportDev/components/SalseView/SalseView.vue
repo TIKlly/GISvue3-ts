@@ -49,7 +49,7 @@ import * as echarts from "echarts";
 
 const activeIndex = ref("1");
 
-function onMenuSelect(index) {
+function onMenuSelect(index: string) {
   activeIndex.value = index;
 }
 
