@@ -4,6 +4,7 @@ export default {
     meta: {
         navState: true,
         navName: '测试',
+        icon: "Smoking"
     },
     children: [
         {
@@ -11,6 +12,7 @@ export default {
             meta: {
                 navState: true,
                 navName: 'ONE',
+                icon: "Smoking"
 
             },
             children: [

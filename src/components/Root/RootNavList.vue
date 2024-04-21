@@ -1,7 +1,11 @@
 <template>
+
+
+
     <template v-for="item in props.routesList" :key="item.path">
         <el-menu-item v-if="!('children' in item)" :index="item.path" :key="item.path">
-            <i :class="item.meta.icon"></i>
+            <i v-if="item.meta.icon && item.meta.icon.includes('icon')" :class="item.meta.icon"></i>
+            <component class="icon" v-else :is="item.meta.icon"></component>
             <template #title>{{ item.meta.navName }}</template>
         </el-menu-item>
         <el-sub-menu v-else :index="item.path" :key="item.path + '-sub-menu'">

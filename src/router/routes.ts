@@ -6,7 +6,7 @@ import echartsRoutes from './echartsRoutes.ts'
 import olRoutes from './olRoutes.ts'
 // import threeRoutes from './threeRoutes.js'
 // import fabricRoutes from './fabricRoutes.js'
-
+import antvX6 from './antvX6.ts'
 import testRoutes from './testRoutes'
 
 
@@ -18,6 +18,7 @@ export const routes = [
         component: Home
     },
     testRoutes,
+    antvX6,
 
     // nativeRoutes,
     // svgRoutes,
