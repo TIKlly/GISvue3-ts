@@ -6,7 +6,7 @@ export default {
   meta: {
     navState: true,
     navName: 'OpenLayers',
-    icon: 'i-ep-caret-left'
+    icon: 'location'
   },
   children: [
     {
@@ -16,7 +16,7 @@ export default {
       meta: {
         navState: true,
         navName: '基础',
-        icon: 'i-ep-caret-left'
+        icon: 'location'
       },
       children: [
         {

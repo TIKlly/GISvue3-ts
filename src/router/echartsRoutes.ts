@@ -8,7 +8,7 @@ export default { // ECharts
     meta: {
         navState: true,
         navName: 'ECharts',
-        icon: 'i-ep-plus'
+        icon: 'location'
     },
     children: [
         {
@@ -18,7 +18,7 @@ export default { // ECharts
             meta: {
                 navState: true,
                 navName: '基础',
-                icon: 'i-ep-caret-left'
+                icon: 'location'
             },
             children: [
                 {

@@ -4,7 +4,7 @@ export default {
     meta: {
         navState: true,
         navName: '测试',
-        icon: "i-ep-caret-left"
+        icon: "location"
     },
     children: [
         {

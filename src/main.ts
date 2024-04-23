@@ -6,4 +6,6 @@ import persist from 'pinia-plugin-persistedstate'
 import "@/style/tailwind.css"
 const pinia = createPinia()
 
+
 createApp(App).use(router).use(pinia.use(persist)).mount('#app')
+

@@ -1,19 +1,14 @@
 <template>
     <template v-for="item in props.routesList" :key="item.path">
         <el-menu-item v-if="!('children' in item)" :index="item.path" :key="item.path">
-            <!-- <el-icon>
-                <component :is="item.meta.icon"></component>
-            </el-icon> -->
             <template #title>{{ item.meta.navName }}</template>
         </el-menu-item>
         <el-sub-menu v-else :index="item.path" :key="item.path + '-sub-menu'">
             <template #title>
-
-                <IEpPlus />
-                <IEpCaretLeft />
-                <el-icon size="30" color="black">
-                    <component :is="item.meta.icon"></component>
-                </el-icon>
+                <!-- <el-icon>
+                    <component v-if="item.meta" :is="item.meta.icon"></component>
+                </el-icon> -->
+                <!-- TODO  存在bug -->
                 <span v-if="!isShow">{{ item.meta.navName }}</span>
             </template>
             <RootNavList :routesList="item.children" :isShow="props.isShow" v-if="item.children" />

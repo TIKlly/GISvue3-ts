@@ -6,7 +6,7 @@ export default {
   meta: {
     navState: true,
     navName: 'Canvas',
-    icon: 'i-ep-caret-left'
+    icon: 'location'
   },
   children: [
     {
