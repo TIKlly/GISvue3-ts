@@ -1,3 +1,5 @@
+
+
 // echarts
 export default { // ECharts
     path: '/eCharts',
@@ -6,7 +8,7 @@ export default { // ECharts
     meta: {
         navState: true,
         navName: 'ECharts',
-        icon: 'el-icon-s-data'
+        icon: 'i-ep-plus'
     },
     children: [
         {
@@ -16,7 +18,7 @@ export default { // ECharts
             meta: {
                 navState: true,
                 navName: '基础',
-                icon: 'el-icon-s-shop'
+                icon: 'i-ep-caret-left'
             },
             children: [
                 {
@@ -82,15 +84,15 @@ export default { // ECharts
                 //         navName: '插件'
                 //     }
                 // },
-                // {
-                //     path: 'ECharts-Absolute',
-                //     name: 'EChartsAbsolute',
-                //     component: () => import('@/views/ECharts/Basic/pages/Absolute/Absolute.vue'),
-                //     meta: {
-                //         navState: true,
-                //         navName: '定位'
-                //     }
-                // },
+                {
+                    path: 'ECharts-Absolute',
+                    name: 'EChartsAbsolute',
+                    component: () => import('@/views/ECharts/Basic/pages/Absolute/Absolute.vue'),
+                    meta: {
+                        navState: true,
+                        navName: '定位'
+                    }
+                },
                 // {
                 //     path: 'ECharts-Scatter',
                 //     name: 'EChartsScatter',
@@ -180,9 +182,19 @@ export default { // ECharts
                 //         navState: true,
                 //         navName: '词云'
                 //     }
+                // },
+                // {
+                //     path: "datavreportDev",
+                //     name: "datavreportDev",
+                //     component: () => import('@/views/ECharts/DatavReportDev/index.vue'),
+                //     meta: {
+                //         navState: true,
+                //         navName: "datavreportDev"
+                //     }
                 // }
             ]
-        }
+        },
+
 
     ]
 }

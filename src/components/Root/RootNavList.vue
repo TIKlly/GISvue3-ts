@@ -1,19 +1,22 @@
 <template>
-
-
-
     <template v-for="item in props.routesList" :key="item.path">
         <el-menu-item v-if="!('children' in item)" :index="item.path" :key="item.path">
-            <i v-if="item.meta.icon && item.meta.icon.includes('icon')" :class="item.meta.icon"></i>
-            <component class="icon" v-else :is="item.meta.icon"></component>
+            <!-- <el-icon>
+                <component :is="item.meta.icon"></component>
+            </el-icon> -->
             <template #title>{{ item.meta.navName }}</template>
         </el-menu-item>
         <el-sub-menu v-else :index="item.path" :key="item.path + '-sub-menu'">
             <template #title>
-                <i :class="item.meta.icon"></i>
-                <span>{{ item.meta.navName }}</span>
+
+                <IEpPlus />
+                <IEpCaretLeft />
+                <el-icon size="30" color="black">
+                    <component :is="item.meta.icon"></component>
+                </el-icon>
+                <span v-if="!isShow">{{ item.meta.navName }}</span>
             </template>
-            <RootNavList :routesList="item.children!" />
+            <RootNavList :routesList="item.children" :isShow="props.isShow" v-if="item.children" />
         </el-sub-menu>
     </template>
 </template>
@@ -21,7 +24,9 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
+
 const props = defineProps<{
+    isShow: boolean,
     routesList: {
         path: string;
         name: string;

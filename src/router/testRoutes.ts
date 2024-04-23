@@ -4,7 +4,7 @@ export default {
     meta: {
         navState: true,
         navName: '测试',
-        icon: "Smoking"
+        icon: "i-ep-caret-left"
     },
     children: [
         {
@@ -12,8 +12,6 @@ export default {
             meta: {
                 navState: true,
                 navName: 'ONE',
-                icon: "Smoking"
-
             },
             children: [
                 {

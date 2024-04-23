@@ -1,5 +1,5 @@
 <template>
-  <div class="common-layout">
+  <div>
     <el-container>
       <el-aside>
         <RootNav></RootNav>
@@ -8,7 +8,7 @@
         <el-header>
           <RootHeader></RootHeader>
         </el-header>
-        <el-main class="h-ful">
+        <el-main>
           <RouterView></RouterView>
         </el-main>
       </el-container>

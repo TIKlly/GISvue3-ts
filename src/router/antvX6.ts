@@ -6,7 +6,7 @@ export default {
     meta: {
         navState: true,
         navName: 'Antvx6',
-        icon: 'el-icon-data-board'
+        icon: 'i-ep-caret-left'
     },
     children: [
         {

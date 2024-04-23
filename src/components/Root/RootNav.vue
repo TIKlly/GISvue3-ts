@@ -1,12 +1,12 @@
 <template>
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-         <el-radio-button :value="false">expand</el-radio-button>
+        <el-radio-button :value="false">expand</el-radio-button>
         <el-radio-button :value="true">collapse</el-radio-button>
     </el-radio-group>
-    <el-menu router :collapse="isCollapse" class=" h-full" :default-active="currentPath" @open="handleOpen"
+    <el-menu router :collapse="isCollapse" :default-active="currentPath" :unique-opened="true" @open="handleOpen"
         @close="handleClose">
-        <el-scrollbar class=" h-screen">
-            <RootNavList :routesList="routesList" />
+        <el-scrollbar class="h-screen">
+            <RootNavList :routesList="routesList" :isShow="isCollapse" />
         </el-scrollbar>
     </el-menu>
 </template>

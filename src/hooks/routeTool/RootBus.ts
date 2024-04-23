@@ -7,7 +7,6 @@ interface Subscription {
 class RootBus {
     list: Subscription;
     isCollapse: Ref<boolean>;
-
     constructor() {
         // 收集订阅信息,调度中心
         this.list = {};
