@@ -5,7 +5,7 @@
       isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     ]" @click="changeMenu"></i>
     <div class="root__header__main">
-      <h2 class="root__header__title" @click="toHome">Front-end visualization</h2>
+      <h2 class="root__header__title" @click="toHome">前端可视化及桌面应用</h2>
       <div class="repository__x">
         <el-tooltip class="repository__item" content="...." placement="bottom" effect="light">
 

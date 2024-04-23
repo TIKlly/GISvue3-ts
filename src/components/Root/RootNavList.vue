@@ -9,9 +9,9 @@
                     <component v-if="item.meta" :is="item.meta.icon"></component>
                 </el-icon> -->
                 <!-- TODO  存在bug -->
-                <span v-if="!isShow">{{ item.meta.navName }}</span>
+                <span>{{ item.meta.navName }}</span>
             </template>
-            <RootNavList :routesList="item.children" :isShow="props.isShow" v-if="item.children" />
+            <RootNavList :routesList="item.children" v-if="item.children" />
         </el-sub-menu>
     </template>
 </template>
@@ -21,7 +21,7 @@ import { defineProps } from 'vue';
 
 
 const props = defineProps<{
-    isShow: boolean,
+
     routesList: {
         path: string;
         name: string;
