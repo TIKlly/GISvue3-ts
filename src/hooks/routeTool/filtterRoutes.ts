@@ -30,6 +30,8 @@ export function filterRoutes(routes: Route[], parentPath: string = ''): Route[] 
             });
         }
 
+
+
         return filteredRoutes;
     }, []);
 }

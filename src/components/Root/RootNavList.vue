@@ -5,10 +5,6 @@
         </el-menu-item>
         <el-sub-menu v-else :index="item.path" :key="item.path + '-sub-menu'">
             <template #title>
-                <!-- <el-icon>
-                    <component v-if="item.meta" :is="item.meta.icon"></component>
-                </el-icon> -->
-                <!-- TODO  存在bug -->
                 <span>{{ item.meta.navName }}</span>
             </template>
             <RootNavList :routesList="item.children" v-if="item.children" />

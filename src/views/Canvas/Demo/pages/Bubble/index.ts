@@ -172,7 +172,7 @@ export default function createCanvasAnimation() {
     e.preventDefault();
   });
 
-  let startAttracting: NodeJS.Timeout;
+  let startAttracting: any;
 
   canvas.addEventListener('mousedown', (e) => {
     mouseX = e.pageX;
@@ -196,7 +196,7 @@ export default function createCanvasAnimation() {
     attract = false;
   });
 
-  let resizing: NodeJS.Timeout;
+  let resizing: any;
 
   window.addEventListener('resize', () => {
     clearTimeout(resizing);

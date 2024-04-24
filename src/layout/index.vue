@@ -2,16 +2,14 @@
     <el-container>
         <!-- 侧边栏按钮（仅在移动端显示） -->
         <el-button v-if="isMobile" type="primary" class="sidebar-btn" @click="toggleDrawer">
-            open
+            <el-icon>
+                <Operation />
+            </el-icon>
         </el-button>
-        <!-- 侧边栏（移动端布局） -->
-        <el-drawer v-if="isMobile" v-model="isDrawerVisible" direction="ltr" :modal="false" >
-            <RootNav></RootNav>
-        </el-drawer>
 
         <!-- 侧边栏（大屏幕布局） -->
-        <el-aside v-else>
-            <RootNav></RootNav>
+        <el-aside v-if="!isMobile" class="w-[180px]">
+            <RootNav :currentPath="currentPath"></RootNav>
         </el-aside>
 
         <!-- 内容区域 -->
@@ -30,14 +28,15 @@
 import { ref, onMounted, computed } from 'vue'
 import RootNav from '@/components/Root/RootNav.vue';
 import RootHeader from "@/components/Root/RootHeader.vue"
+import { Operation } from "@element-plus/icons-vue"
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 const isMobile = ref<boolean>(false)
-const isDrawerVisible = ref<boolean>(false)
 
 onMounted(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
-    handleRouteChange();
 })
 
 function handleResize() {
@@ -45,15 +44,13 @@ function handleResize() {
 }
 
 function toggleDrawer() {
-    isDrawerVisible.value = !isDrawerVisible.value
+    // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
 }
 
-// 根据当前的布局方式设置侧边栏的显示状态
-function handleRouteChange() {
-    if (isMobile.value) {
-        isDrawerVisible.value = false; // 在移动端布局中，路由跳转时隐藏侧边栏
-    }
-}
+// 当前路由
+const currentPath = computed(() => {
+    return route.path
+})
 
 // 使用计算属性动态计算内容区域的内边距
 const contentPadding = computed(() => isMobile.value ? '20px' : '40px')
