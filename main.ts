@@ -20,7 +20,7 @@ function createWindow() {
     if (app.isPackaged) {
         win.loadFile(path.join(__dirname, "../index.html"));
     } else {
-        let url = "http://127.0.0.1:5173/"; // 本地启动的vue项目路径
+        let url = "https://giswrold.web.app"; // 本地启动的vue项目路径
         win.loadURL(url);
     }
 };
