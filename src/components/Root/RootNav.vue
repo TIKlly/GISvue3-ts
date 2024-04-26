@@ -11,32 +11,20 @@
 
 <script setup lang="ts">
 import RootNavList from './RootNavList.vue';
-import { ref, computed } from "vue"
-import { useRouter } from 'vue-router';
-import { Route, filterRoutes } from "@/hooks/routeTool/filtterRoutes"
+import { ref } from "vue"
 import RootBus from '@/hooks/routeTool/RootBus';
 
-
-const router = useRouter()
-// const route = useRoute()
 
 const isCollapse = ref(RootBus.isCollapse)
 // 规则化获取路由
 
-const routesList: any = computed(() => {
-    return filterRoutes(router.options.routes as Route[])
-    // return router.options.routes as Route[]
-})
+
 
 const props = defineProps<{
-    currentPath: string
+    currentPath: string,
+    routesList: any
 }>()
 
-
-// // 当前路由
-// const currentPath = computed(() => {
-//     return route.path
-// })
 
 const handleOpen = (key: string, keyPath: string[]) => {
     console.log(key, keyPath)

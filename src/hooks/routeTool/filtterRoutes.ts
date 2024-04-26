@@ -8,6 +8,8 @@ export interface Route {
 }
 
 export function filterRoutes(routes: Route[], parentPath: string = ''): Route[] {
+
+    const n = 1
     return routes.reduce<Route[]>((filteredRoutes, route) => {
         // 排除404，排除没有meta的路由，排除navState不为true的路由
         if (
@@ -28,10 +30,8 @@ export function filterRoutes(routes: Route[], parentPath: string = ''): Route[] 
                 ...route,
                 path: currentPath,
             });
+            n + 1
         }
-
-
-
         return filteredRoutes;
     }, []);
 }

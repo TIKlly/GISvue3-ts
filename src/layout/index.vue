@@ -6,12 +6,14 @@
                 <Operation />
             </el-icon>
         </el-button>
-
         <!-- 侧边栏（大屏幕布局） -->
         <el-aside v-if="!isMobile" class="w-[180px]">
-            <RootNav :currentPath="currentPath"></RootNav>
+            <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
         </el-aside>
-
+        <!-- 移动端显示 -->
+        <el-drawer v-else direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
+            <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
+        </el-drawer>
         <!-- 内容区域 -->
         <el-container>
             <el-header>
@@ -30,9 +32,16 @@ import RootNav from '@/components/Root/RootNav.vue';
 import RootHeader from "@/components/Root/RootHeader.vue"
 import { Operation } from "@element-plus/icons-vue"
 import { useRoute } from 'vue-router';
-
+import { useRouter } from 'vue-router';
+import { Route, filterRoutes } from "@/hooks/routeTool/filtterRoutes"
 const route = useRoute()
 const isMobile = ref<boolean | any>(false)
+const drawer = ref(false)
+const router = useRouter()
+const routesList: any = computed(() => {
+    return filterRoutes(router.options.routes as Route[])
+    // return router.options.routes as Route[]
+})
 
 onMounted(() => {
     handleResize()
@@ -50,7 +59,10 @@ const currentPath = computed(() => {
 })
 
 function toggleDrawer() {
-    isMobile.value = !isMobile.value
+    // isMobile.value = !isMobile.value
+    drawer.value = true
+
+    console.log(isMobile.value, drawer.value);
     // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
 }
 
