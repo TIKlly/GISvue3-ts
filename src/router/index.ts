@@ -1,5 +1,8 @@
 
 import { createRouter, createWebHistory } from "vue-router";
+// @ts-ignore
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css' // progress bar style
 
 import { routes } from "./routes";
 
@@ -11,7 +14,14 @@ const router = createRouter({
 
 // 动态路由匹配
 
+router.beforeEach((_to, _from, next) => {
+    NProgress.start()
+    next()
+})
 
+router.afterEach(() => {
+    NProgress.done()
+})
 
 
 export default router;

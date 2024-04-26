@@ -32,7 +32,7 @@ import { Operation } from "@element-plus/icons-vue"
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
-const isMobile = ref<boolean>(false)
+const isMobile = ref<boolean | any>(false)
 
 onMounted(() => {
     handleResize()
@@ -43,14 +43,16 @@ function handleResize() {
     isMobile.value = window.innerWidth < 767
 }
 
-function toggleDrawer() {
-    // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
-}
 
 // 当前路由
 const currentPath = computed(() => {
     return route.path
 })
+
+function toggleDrawer() {
+    isMobile.value = !isMobile.value
+    // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
+}
 
 // 使用计算属性动态计算内容区域的内边距
 const contentPadding = computed(() => isMobile.value ? '20px' : '40px')
