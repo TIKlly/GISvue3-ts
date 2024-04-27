@@ -21,7 +21,11 @@ body {
 
 /* 响应式布局 */
 @media (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
 
+    /* 在小屏幕设备上设置较小的字体大小 */
     /* 小屏幕样式 */
     .container {
         padding: 0 10px;
@@ -36,5 +40,10 @@ body {
     .container {
         padding: 0 5px;
         /* 左右边距为 5px */
+    }
+
+    html {
+        font-size: 12px;
+        /* 在移动设备上设置最小的字体大小 */
     }
 }

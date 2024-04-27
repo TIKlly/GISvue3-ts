@@ -1,6 +1,9 @@
 <template>
     <div class="flex justify-center items-center h-[80%]">
-        <canvas ref="canvas" class="w-[50%] h-[100%]" width="400" height="400"></canvas>
+        <!-- <iframe src="https://lottie.host/embed/74a3188f-30e9-40a1-a7ac-969c7f4a8ddb/eUXDhTitLS.json"></iframe> -->
+        <img class="w-full  h-full" src="@/assets/images/login_left3.png" alt="">
+        <!-- <svg src="@/assets/images/Animation - 1697770821211.json"></svg> -->
+        <!-- <canvas ref="canvas" class="w-[50%] h-[100%]" width="400" height="400"></canvas> -->
     </div>
 </template>
 

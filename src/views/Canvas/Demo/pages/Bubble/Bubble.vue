@@ -20,11 +20,26 @@ onMounted(() => {
 <style lang="scss" scoped>
 .app__home {
   width: 800px;
-  height: 800px;
+  height: 560px;
 
   iframe {
     width: 100%;
     height: 100%;
+  }
+
+}
+
+@media (max-width: 640px) {
+
+  /* 移动设备样式 */
+  .app__home {
+    width: 400px;
+    height: 300px;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

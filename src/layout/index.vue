@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <!-- 侧边栏按钮（仅在移动端显示） -->
-        <el-button v-if="isMobile" type="primary" class="sidebar-btn" @click="toggleDrawer">
+        <el-button v-if="isMobile" type="primary" @click="toggleDrawer">
             <el-icon>
                 <Operation />
             </el-icon>
@@ -11,8 +11,10 @@
             <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
         </el-aside>
         <!-- 移动端显示 -->
+
         <el-drawer v-else direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
             <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
+
         </el-drawer>
         <!-- 内容区域 -->
         <el-container>
@@ -72,11 +74,9 @@ const contentPadding = computed(() => isMobile.value ? '20px' : '40px')
 
 <style scoped lang="scss">
 .sidebar-btn {
-    position: fixed;
-    top: 20px;
+    top: 30px;
     left: 20px;
-    font-size: 24px;
+    font-size: 20px;
     cursor: pointer;
-    z-index: 1000;
 }
 </style>

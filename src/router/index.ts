@@ -14,14 +14,14 @@ const router = createRouter({
 
 // 动态路由匹配
 
-router.beforeEach((_to, _from, next) => {
-    NProgress.start()
-    next()
-})
+// router.beforeEach((_to, _from, next) => {
+//     NProgress.start()
+//     next()
+// })
 
-router.afterEach(() => {
-    NProgress.done()
-})
+// router.afterEach(() => {
+//     NProgress.done()
+// })
 
 
 export default router;
