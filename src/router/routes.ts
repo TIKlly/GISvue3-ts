@@ -8,7 +8,7 @@ import olRoutes from './olRoutes.ts'
 // import fabricRoutes from './fabricRoutes.js'
 import antvX6 from './antvX6.ts'
 import testRoutes from './testRoutes'
-
+import Orgtree from "./orgtree";
 
 const Home = () => import("@/views/Home/index.vue")
 export const routes = [
@@ -26,6 +26,7 @@ export const routes = [
     echartsRoutes,
     // bmapRoutes,
     olRoutes,
+    Orgtree,
     // threeRoutes,
     // fabricRoutes,
     { // 404
