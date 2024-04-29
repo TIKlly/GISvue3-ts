@@ -26,11 +26,11 @@ const props = defineProps<{
 }>()
 
 
-const handleOpen = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
+const handleOpen = (_key: string, _keyPath: string[]) => {
+    // console.log(_key, _keyPath)
 }
-const handleClose = (key: string, keyPath: string[]) => {
-    console.log(key, keyPath)
+const handleClose = (_key: string, _keyPath: string[]) => {
+    // console.log(key, keyPath)
 }
 
 </script>

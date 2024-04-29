@@ -32,5 +32,6 @@ declare module 'vue' {
     ToolTestOne: typeof import('./src/components/toolTest/one.vue')['default']
     ToolTestThree: typeof import('./src/components/toolTest/three.vue')['default']
     ToolTestTwo: typeof import('./src/components/toolTest/two.vue')['default']
+    WindowTest: typeof import('./src/components/windowTest.vue')['default']
   }
 }
