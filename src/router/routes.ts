@@ -9,6 +9,7 @@ import olRoutes from './olRoutes.ts'
 import antvX6 from './antvX6.ts'
 import testRoutes from './testRoutes'
 import Orgtree from "./orgtree";
+import Rirebase from "./firebase_route.ts"
 
 const Home = () => import("@/views/Home/index.vue")
 export const routes = [
@@ -19,7 +20,7 @@ export const routes = [
     },
     testRoutes,
     antvX6,
-
+    Rirebase,
     // nativeRoutes,
     // svgRoutes,
     canvasRoutes,

@@ -19,10 +19,12 @@ declare module 'vue' {
     ElMain: typeof import('element-plus/es')['ElMain']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElProgress: typeof import('element-plus/es')['ElProgress']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     RootRootHeader: typeof import('./src/components/Root/RootHeader.vue')['default']
     RootRootNav: typeof import('./src/components/Root/RootNav.vue')['default']
     RootRootNavList: typeof import('./src/components/Root/RootNavList.vue')['default']
@@ -34,6 +36,7 @@ declare module 'vue' {
     ToolTestOne: typeof import('./src/components/toolTest/one.vue')['default']
     ToolTestThree: typeof import('./src/components/toolTest/three.vue')['default']
     ToolTestTwo: typeof import('./src/components/toolTest/two.vue')['default']
+    Upload: typeof import('./src/components/Upload.vue')['default']
     WindowTest: typeof import('./src/components/windowTest.vue')['default']
   }
 }

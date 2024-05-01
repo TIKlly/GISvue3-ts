@@ -79,7 +79,7 @@ export default {
         };
     },
     created() {
-        // this.toggleExpand(this.data, this.expandAll);
+        this.toggleExpand(this.data, this.expandAll);
     },
     methods: {
         onMenus({ node, command }) {
@@ -114,7 +114,7 @@ export default {
             ElMessage.info(data.label);
         },
         expandChange() {
-            // this.toggleExpand(this.data, this.expandAll);
+            this.toggleExpand(this.data, this.expandAll);
         },
         toggleExpand(data, val) {
             if (Array.isArray(data)) {

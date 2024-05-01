@@ -2,7 +2,6 @@
   <div>
     <startPage />
     <Layout />
-
     <!-- <WindowTest></WindowTest> -->
   </div>
 </template>
