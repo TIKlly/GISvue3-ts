@@ -20,6 +20,7 @@
     </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { ElSwitch, ElColorPicker, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 export default {
