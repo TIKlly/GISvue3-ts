@@ -11,7 +11,7 @@
             背景色：<el-color-picker v-model="style.background" size="small"></el-color-picker>&nbsp;
             文字颜色：<el-color-picker v-model="style.color" size="small"></el-color-picker>&nbsp;
         </div>
-        <div style="height: 400px;">
+        <div style="height: 600px;">
             <vue3-tree-org :data="data" center :horizontal="horizontal" :collapsable="collapsable" :label-style="style"
                 :only-one-node="onlyOneNode" :clone-node-drag="cloneNodeDrag" :before-drag-end="beforeDragEnd"
                 @on-node-drag="nodeDragMove" @on-node-drag-end="nodeDragEnd" @on-contextmenu="onMenus"
@@ -19,7 +19,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 import { ElSwitch, ElColorPicker, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 export default {
@@ -79,7 +79,7 @@ export default {
         };
     },
     created() {
-        this.toggleExpand(this.data, this.expandAll);
+        // this.toggleExpand(this.data, this.expandAll);
     },
     methods: {
         onMenus({ node, command }) {
@@ -114,7 +114,7 @@ export default {
             ElMessage.info(data.label);
         },
         expandChange() {
-            this.toggleExpand(this.data, this.expandAll);
+            // this.toggleExpand(this.data, this.expandAll);!
         },
         toggleExpand(data, val) {
             if (Array.isArray(data)) {
