@@ -18,7 +18,7 @@ export const useUserStore = defineStore("auth", {
             this.componentPath = path;
         },
         Login(data: LoginType) {
-            router.push("/home")
+            router.push("/")
             userLogin(data).then((res) => {
                 this.user = res.data.user;
                 localStorage.setItem("token", res.data.token);

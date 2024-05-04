@@ -10,17 +10,16 @@ export default {
   },
   children: [
     {
-      path: 'ol-basic',
+      path: '/ol-basic',
       name: 'OpenLayersBasic',
       component: () => import('@/views/OpenLayers/Basic/index.vue'),
       meta: {
         navState: true,
         navName: '基础',
-        icon: 'location'
       },
       children: [
         {
-          path: 'ol-stated',
+          path: '/ol-stated',
           name: 'olStated',
           component: () => import('@/views/OpenLayers/Basic/pages/Stated/Stated.vue'),
           meta: {
@@ -29,7 +28,7 @@ export default {
           }
         },
         {
-          path: 'ol-popup',
+          path: '/ol-popup',
           name: 'olPopup',
           component: () => import('@/views/OpenLayers/Basic/pages/Popup/Popup.vue'),
           meta: {
@@ -38,7 +37,7 @@ export default {
           }
         },
         {
-          path: 'ol-zoom',
+          path: '/ol-zoom',
           name: 'olZoom',
           component: () => import('@/views/OpenLayers/Basic/pages/Zoom/Zoom.vue'),
           meta: {
@@ -47,7 +46,7 @@ export default {
           }
         },
         {
-          path: 'ol-tabIndex',
+          path: '/ol-tabIndex',
           name: 'olTabIndex',
           component: () => import('@/views/OpenLayers/Basic/pages/TabIndex/TabIndex.vue'),
           meta: {
@@ -56,7 +55,7 @@ export default {
           }
         },
         {
-          path: 'ol-changeTarget',
+          path: '/ol-changeTarget',
           name: 'olChangeTarget',
           component: () => import('@/views/OpenLayers/Basic/pages/ChangeTarget/ChangeTarget.vue'),
           meta: {
@@ -65,7 +64,7 @@ export default {
           }
         },
         {
-          path: 'ol-synchronization',
+          path: '/ol-synchronization',
           name: 'olSynchronization',
           component: () => import('@/views/OpenLayers/Basic/pages/Synchronization/Synchronization.vue'),
           meta: {
@@ -74,7 +73,7 @@ export default {
           }
         },
         {
-          path: 'ol-preloadMap',
+          path: '/ol-preloadMap',
           name: 'olPreloadMap',
           component: () => import('@/views/OpenLayers/Basic/pages/PreloadMap/PreloadMap.vue'),
           meta: {
@@ -83,7 +82,7 @@ export default {
           }
         },
         {
-          path: 'ol-vectorJSON',
+          path: '/ol-vectorJSON',
           name: 'olVectorJSON',
           component: () => import('@/views/OpenLayers/Basic/pages/VectorJSON/VectorJSON.vue'),
           meta: {
@@ -92,7 +91,7 @@ export default {
           }
         },
         {
-          path: 'ol-vectorHigh',
+          path: '/ol-vectorHigh',
           name: 'olVectorHigh',
           component: () => import('@/views/OpenLayers/Basic/pages/VectorHigh/VectorHigh.vue'),
           meta: {
@@ -101,7 +100,7 @@ export default {
           }
         },
         {
-          path: 'ol-rotationMap',
+          path: '/ol-rotationMap',
           name: 'olRotationMap',
           component: () => import('@/views/OpenLayers/Basic/pages/RotationMap/RotationMap.vue'),
           meta: {
@@ -110,7 +109,7 @@ export default {
           }
         },
         {
-          path: 'ol-mouseRotationMap',
+          path: '/ol-mouseRotationMap',
           name: 'olMouseRotationMap',
           component: () => import('@/views/OpenLayers/Basic/pages/MouseRotationMap/MouseRotationMap.vue'),
           meta: {
@@ -119,7 +118,7 @@ export default {
           }
         },
         {
-          path: 'ol-viewAnimate',
+          path: '/ol-viewAnimate',
           name: 'olViewAnimate',
           component: () => import('@/views/OpenLayers/Basic/pages/ViewAnimate/ViewAnimate.vue'),
           meta: {
@@ -128,7 +127,7 @@ export default {
           }
         },
         {
-          path: 'ol-graticule',
+          path: '/ol-graticule',
           name: 'olGraticule',
           component: () => import('@/views/OpenLayers/Basic/pages/Graticule/Graticule.vue'),
           meta: {
@@ -137,7 +136,7 @@ export default {
           }
         },
         // {
-        //   path: 'ol-heatmap',
+        //   path: '/ol-heatmap',
         //   name: 'olHeatmap',
         //   component: () => import('@/views/OpenLayers/Basic/pages/Heatmap/Heatmap.vue'),
         //   meta: {
@@ -146,7 +145,7 @@ export default {
         //   }
         // },
         {
-          path: 'ol-scaleLine',
+          path: '/ol-scaleLine',
           name: 'olScaleLine',
           component: () => import('@/views/OpenLayers/Basic/pages/ScaleLine/ScaleLine.vue'),
           meta: {
@@ -155,7 +154,7 @@ export default {
           }
         },
         {
-          path: 'ol-FullScreen',
+          path: '/ol-FullScreen',
           name: 'olFullScreen',
           component: () => import('@/views/OpenLayers/Basic/pages/FullScreen/FullScreen.vue'),
           meta: {
@@ -164,7 +163,7 @@ export default {
           }
         },
         {
-          path: 'ol-zoomToExtent',
+          path: '/ol-zoomToExtent',
           name: 'olZoomToExtent',
           component: () => import('@/views/OpenLayers/Basic/pages/ZoomToExtent/ZoomToExtent.vue'),
           meta: {
@@ -173,7 +172,7 @@ export default {
           }
         },
         {
-          path: 'ol-overviewMap',
+          path: '/ol-overviewMap',
           name: 'olOverviewMap',
           component: () => import('@/views/OpenLayers/Basic/pages/OverviewMap/OverviewMap.vue'),
           meta: {
@@ -182,7 +181,7 @@ export default {
           }
         },
         {
-          path: 'ol-mousePosition',
+          path: '/ol-mousePosition',
           name: 'olMousePosition',
           component: () => import('@/views/OpenLayers/Basic/pages/MousePosition/MousePosition.vue'),
           meta: {
@@ -191,7 +190,7 @@ export default {
           }
         },
         {
-          path: 'ol-zoomSlider',
+          path: '/ol-zoomSlider',
           name: 'olZoomSlider',
           component: () => import('@/views/OpenLayers/Basic/pages/ZoomSlider/ZoomSlider.vue'),
           meta: {
@@ -200,7 +199,7 @@ export default {
           }
         },
         {
-          path: 'ol-LayerGroup',
+          path: '/ol-LayerGroup',
           name: 'olLayerGroup',
           component: () => import('@/views/OpenLayers/Basic/pages/LayerGroup/LayerGroup.vue'),
           meta: {
@@ -209,7 +208,7 @@ export default {
           }
         },
         {
-          path: 'ol-setZIndex',
+          path: '/ol-setZIndex',
           name: 'olSetZIndex',
           component: () => import('@/views/OpenLayers/Basic/pages/SetZIndex/SetZIndex.vue'),
           meta: {
@@ -218,7 +217,7 @@ export default {
           }
         },
         {
-          path: 'ol-setResolution',
+          path: '/ol-setResolution',
           name: 'olSetResolution',
           component: () => import('@/views/OpenLayers/Basic/pages/SetResolution/SetResolution.vue'),
           meta: {
@@ -227,7 +226,7 @@ export default {
           }
         },
         {
-          path: 'ol-setExtent',
+          path: '/ol-setExtent',
           name: 'olSetExtent',
           component: () => import('@/views/OpenLayers/Basic/pages/SetExtent/SetExtent.vue'),
           meta: {
@@ -236,7 +235,7 @@ export default {
           }
         },
         {
-          path: 'ol-coverageModal',
+          path: '/ol-coverageModal',
           name: 'olCoverageModal',
           component: () => import('@/views/OpenLayers/Basic/pages/CoverageModal/CoverageModal.vue'),
           meta: {
@@ -245,7 +244,7 @@ export default {
           }
         },
         {
-          path: 'ol-setSource',
+          path: '/ol-setSource',
           name: 'olSetSource',
           component: () => import('@/views/OpenLayers/Basic/pages/SetSource/SetSource.vue'),
           meta: {
@@ -254,7 +253,7 @@ export default {
           }
         },
         // {
-        //   path: 'ol-simplenessLabel',
+        //   path: '/ol-simplenessLabel',
         //   name: 'olSimplenessLabel',
         //   component: () => import('@/views/OpenLayers/Basic/pages/SimplenessLabel/SimplenessLabel.vue'),
         //   meta: {
@@ -263,7 +262,7 @@ export default {
         //   }
         // },
         {
-          path: 'ol-brightMark',
+          path: '/ol-brightMark',
           name: 'olBrightMark',
           component: () => import('@/views/OpenLayers/Basic/pages/BrightMark/BrightMark.vue'),
           meta: {
@@ -272,7 +271,7 @@ export default {
           }
         },
         {
-          path: 'ol-polymerization',
+          path: '/ol-polymerization',
           name: 'olPolymerization',
           component: () => import('@/views/OpenLayers/Basic/pages/Polymerization/Polymerization.vue'),
           meta: {
@@ -281,7 +280,7 @@ export default {
           }
         },
         {
-          path: 'ol-basicDraw',
+          path: '/ol-basicDraw',
           name: 'olBasicDraw',
           component: () => import('@/views/OpenLayers/Basic/pages/BasicDraw/BasicDraw.vue'),
           meta: {
@@ -290,7 +289,7 @@ export default {
           }
         },
         {
-          path: 'ol-drawGraph',
+          path: '/ol-drawGraph',
           name: 'olDrawGraph',
           component: () => import('@/views/OpenLayers/Basic/pages/DrawGraph/DrawGraph.vue'),
           meta: {
@@ -299,7 +298,7 @@ export default {
           }
         },
         {
-          path: 'ol-freeDrawing',
+          path: '/ol-freeDrawing',
           name: 'olFreeDrawing',
           component: () => import('@/views/OpenLayers/Basic/pages/FreeDrawing/FreeDrawing.vue'),
           meta: {
@@ -308,7 +307,7 @@ export default {
           }
         },
         {
-          path: 'ol-arrowLine',
+          path: '/ol-arrowLine',
           name: 'olArrowLine',
           component: () => import('@/views/OpenLayers/Basic/pages/ArrowLine/ArrowLine.vue'),
           meta: {
@@ -317,7 +316,7 @@ export default {
           }
         },
         // {
-        //   path: 'ol-snapGraph',
+        //   path: '/ol-snapGraph',
         //   name: 'olSnapGraph',
         //   component: () => import('@/views/OpenLayers/Basic/pages/SnapGraph/SnapGraph.vue'),
         //   meta: {

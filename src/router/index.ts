@@ -4,7 +4,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
 
-import { routes } from "./routes";
+import { routes } from "./routes copy";
 
 const router = createRouter({
     history: createWebHistory(),

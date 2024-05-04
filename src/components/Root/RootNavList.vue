@@ -1,10 +1,16 @@
 <template>
     <template v-for="item in props.routesList" :key="item.path">
-        <el-menu-item v-if="!('children' in item)" :index="item.path" :key="item.path">
+        <el-menu-item v-if="!item.children?.length" :index="item.path" :key="item.path">
+            <el-icon v-if="item.meta.icon">
+                <component :is="item.meta.icon"></component>
+            </el-icon>
             <template #title>{{ item.meta.navName }}</template>
         </el-menu-item>
         <el-sub-menu v-else :index="item.path" :key="item.path + '-sub-menu'">
             <template #title>
+                <el-icon v-if="item.meta.icon">
+                    <component :is="item.meta.icon"></component>
+                </el-icon>
                 <span>{{ item.meta.navName }}</span>
             </template>
             <RootNavList :routesList="item.children" v-if="item.children" />
@@ -24,6 +30,7 @@ const props = defineProps<{
         meta: {
             icon: string;
             navName: string;
+            _blank?: boolean
         };
         children?: {
             path: string;

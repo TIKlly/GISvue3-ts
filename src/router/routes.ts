@@ -11,25 +11,23 @@ import testRoutes from './testRoutes'
 import Orgtree from "./orgtree";
 import Rirebase from "./firebase_route.ts"
 
+import dataScreen from './dataScreen-route.ts'
+
 const Home = () => import("@/views/Home/index.vue")
 export const routes = [
     {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
     },
     testRoutes,
     antvX6,
     Rirebase,
-    // nativeRoutes,
-    // svgRoutes,
     canvasRoutes,
     echartsRoutes,
-    // bmapRoutes,
     olRoutes,
     Orgtree,
-    // threeRoutes,
-    // fabricRoutes,
+    dataScreen,
     { // 404
         path: '/:pathMatch(.*)*',
         name: 'NotFound',

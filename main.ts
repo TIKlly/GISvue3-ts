@@ -15,7 +15,7 @@ function createWindow() {
     });
 
     // 打开开发工具
-    // win.webContents.openDevTls()oo
+    // win.webContents.openDevTls()oo1
     // 如果打包了，渲染index.html
     if (app.isPackaged) {
         win.loadFile(path.join(__dirname, "../index.html"));

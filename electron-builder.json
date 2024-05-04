@@ -1,0 +1,15 @@
+{
+    "productName": "Tik",
+    "files": [
+        "./main.ts",
+        "./dist",
+        "./preload.ts"
+    ],
+    "extraFiles": [
+        "./videos",
+        "./cvideo"
+    ],
+    "directories": {
+        "output": "./buileder"
+    }
+}

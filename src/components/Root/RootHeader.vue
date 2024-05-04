@@ -1,5 +1,5 @@
 <template>
-  <header class="root__header">
+  <header class="root__header bg-white">
     <i :class="[
       'root__header__collapseBtn',
       isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
@@ -8,7 +8,7 @@
       <h2 class="root__header__title " @click="toHome">前端可视化及桌面应用</h2>
       <div class="repository__x">
         <el-tooltip class="repository__item" content="...." placement="bottom" effect="light">
-
+          
         </el-tooltip>
       </div>
     </div>

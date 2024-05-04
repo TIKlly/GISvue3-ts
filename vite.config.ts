@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+import path from 'path'
 export default defineConfig({
   plugins: [vue(),
   AutoImport({
@@ -19,10 +19,10 @@ export default defineConfig({
     directoryAsNamespace: true,
   }),
   ],
+  base: './',//配合electron打包
   resolve: {
-    alias: {
-      '@': '/src' //这样@就指向src目录了
-    }
+
+    alias: { "@": path.resolve(__dirname, "src") },
   },
   server: {
     proxy: {

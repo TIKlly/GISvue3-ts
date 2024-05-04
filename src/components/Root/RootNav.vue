@@ -1,12 +1,8 @@
 <template>
-    <el-menu router :collapse="isCollapse" :default-active="props.currentPath" :unique-opened="true" @open="handleOpen"
-        @close="handleClose">
-        <el-scrollbar class="h-screen">
-            <RootNavList :routesList="routesList" />
-        </el-scrollbar>
+    <el-menu class=" h-screen w-[180px]" router :collapse="isCollapse" :default-active="props.currentPath" :unique-opened="true"
+        @open="handleOpen" @close="handleClose">
+        <RootNavList :routesList="routesList" />
     </el-menu>
-
-
 </template>
 
 <script setup lang="ts">

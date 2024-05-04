@@ -4,35 +4,25 @@ export default {
     meta: {
         navState: true,
         navName: '测试',
-        icon: "location"
+        icon: "MessageBox"
     },
     children: [
         {
-            path: 'one', name: 'homeIndex', component: () => import('@/components/toolTest/one.vue'),
+            path: '/one', name: 'homeIndex', component: () => import('@/components/toolTest/one.vue'),
             meta: {
                 navState: true,
                 navName: 'ONE',
             },
-            children: [
-                {
-                    path: 'two2', name: 'homeAbout', component: () => import('@/components/toolTest/one.vue'),
-                    meta: {
-                        navState: true,
-                        navName: 'TWO',
-                    }
-                },
-
-            ]
         },
         {
-            path: 'two', name: 'homeAbout', component: () => import('@/components/toolTest/two.vue'),
+            path: '/two', name: 'homeAbout', component: () => import('@/components/toolTest/two.vue'),
             meta: {
                 navState: true,
                 navName: 'TWO',
             }
         },
         {
-            path: 'three', name: 'homeContact', component: () => import('@/components/toolTest/three.vue'),
+            path: '/three', name: 'homeContact', component: () => import('@/components/toolTest/three.vue'),
             meta: {
                 navState: true,
                 navName: 'THREE',
@@ -40,7 +30,7 @@ export default {
             }
         },
         {
-            path: 'fours', name: 'homeNews', component: () => import('@/components/toolTest/four.vue'),
+            path: '/fours', name: 'homeNews', component: () => import('@/components/toolTest/four.vue'),
 
             meta: {
                 navState: true,

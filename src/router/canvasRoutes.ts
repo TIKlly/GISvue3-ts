@@ -6,21 +6,20 @@ export default {
   meta: {
     navState: true,
     navName: 'Canvas',
-    icon: 'location'
+    icon: 'MessageBox'
   },
   children: [
     {
-      path: 'canvas-demo',
+      path: '/canvas-demo',
       name: 'CanvasDemo',
       component: () => import('@/views/Canvas/Demo/index.vue'),
       meta: {
         navState: true,
         navName: 'Demo',
-        icon: 'el-icon-sugar'
       },
       children: [
         {
-          path: 'canvas-demo-bubble',
+          path: '/canvas-demo-bubble',
           name: 'CanvasDemoBubble',
           component: () => import('@/views/Canvas/Demo/pages/Bubble/Bubble.vue'),
           meta: {
@@ -30,7 +29,7 @@ export default {
         },
         {
 
-          path: 'canvas-demo-line',
+          path: '/canvas-demo-line',
           name: 'CanvasDemoLine',
           component: () => import('@/views/Canvas/Demo/pages/Line/Line.vue'),
           meta: {

@@ -8,21 +8,20 @@ export default { // ECharts
     meta: {
         navState: true,
         navName: 'ECharts',
-        icon: 'location'
+        icon: 'MessageBox'
     },
     children: [
         {
-            path: 'echarts-basic',
+            path: '/echarts-basic',
             name: 'EChartsBasic',
             component: () => import('@/views/ECharts/Basic/index.vue'),
             meta: {
                 navState: true,
                 navName: '基础',
-                icon: 'location'
             },
             children: [
                 {
-                    path: 'ECharts-Stated',
+                    path: '/ECharts-Stated',
                     name: 'EChartsStated',
                     component: () => import('@/views/ECharts/Basic/pages/Stated/Stated.vue'),
                     meta: {
@@ -31,7 +30,7 @@ export default { // ECharts
                     }
                 },
                 {
-                    path: 'ECharts-GradientStacked',
+                    path: '/ECharts-GradientStacked',
                     name: "GradientStacked",
                     component: () => import('@/views/ECharts/Basic/pages/GradientStackedAreaChart/GradientStacked.vue'),
                     meta: {
@@ -40,7 +39,7 @@ export default { // ECharts
                     }
                 },
                 {
-                    path: 'ECharts-ThemeBuilderJS',
+                    path: '/ECharts-ThemeBuilderJS',
                     name: 'EChartsThemeBuilderJS',
                     component: () => import('@/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJS.vue'),
                     meta: {
@@ -49,7 +48,7 @@ export default { // ECharts
                     }
                 },
                 // {
-                //     path: 'ECharts-ThemeBuilderJSON',
+                //     path: '/ECharts-ThemeBuilderJSON',
                 //     name: 'EChartsThemeBuilderJSON',
                 //     component: () => import('@/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJSON.vue'),
                 //     meta: {
@@ -58,7 +57,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-RendererSVG',
+                //     path: '/ECharts-RendererSVG',
                 //     name: 'EChartsRendererSVG',
                 //     component: () => import('@/views/ECharts/Basic/pages/RendererSVG/RendererSVG.vue'),
                 //     meta: {
@@ -67,7 +66,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-Dataset',
+                //     path: '/ECharts-Dataset',
                 //     name: 'EChartsDataset',
                 //     component: () => import('@/views/ECharts/Basic/pages/Dataset/Dataset.vue'),
                 //     meta: {
@@ -76,7 +75,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-Plugins',
+                //     path: '/ECharts-Plugins',
                 //     name: 'EChartsPlugins',
                 //     component: () => import('@/views/ECharts/Basic/pages/Plugins/Plugins.vue'),
                 //     meta: {
@@ -85,7 +84,7 @@ export default { // ECharts
                 //     }
                 // },
                 {
-                    path: 'ECharts-Absolute',
+                    path: '/ECharts-Absolute',
                     name: 'EChartsAbsolute',
                     component: () => import('@/views/ECharts/Basic/pages/Absolute/Absolute.vue'),
                     meta: {
@@ -94,7 +93,7 @@ export default { // ECharts
                     }
                 },
                 // {
-                //     path: 'ECharts-Scatter',
+                //     path: '/ECharts-Scatter',
                 //     name: 'EChartsScatter',
                 //     component: () => import('@/views/ECharts/Basic/pages/Axis/Scatter.vue'),
                 //     meta: {
@@ -103,7 +102,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-Double',
+                //     path: '/ECharts-Double',
                 //     name: 'EChartsDouble',
                 //     component: () => import('@/views/ECharts/Basic/pages/Axis/Double.vue'),
                 //     meta: {
@@ -112,7 +111,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-More',
+                //     path: '/ECharts-More',
                 //     name: 'EChartsMore',
                 //     component: () => import('@/views/ECharts/Basic/pages/Axis/More.vue'),
                 //     meta: {
@@ -121,7 +120,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-BarYCategory',
+                //     path: '/ECharts-BarYCategory',
                 //     name: 'EChartsBarYCategory',
                 //     component: () => import('@/views/ECharts/Basic/pages/BarYCategory/BarYCategory.vue'),
                 //     meta: {
@@ -130,7 +129,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-AreaFill',
+                //     path: '/ECharts-AreaFill',
                 //     name: 'EChartsAreaFill',
                 //     component: () => import('@/views/ECharts/Basic/pages/AreaFill/Fill.vue'),
                 //     meta: {
@@ -139,7 +138,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-AreaFillGradient',
+                //     path: '/ECharts-AreaFillGradient',
                 //     name: 'EChartsAreaFillGradient',
                 //     component: () => import('@/views/ECharts/Basic/pages/AreaFill/Gradient.vue'),
                 //     meta: {
@@ -148,7 +147,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'ECharts-TypeCustom',
+                //     path: '/ECharts-TypeCustom',
                 //     name: 'EChartsTypeCustom',
                 //     component: () => import('@/views/ECharts/Basic/pages/TypeCustom/Icon.vue'),
                 //     meta: {
@@ -157,7 +156,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'map',
+                //     path: '/map',
                 //     name: 'Map',
                 //     component: () => import('@/views/ECharts/Basic/pages/Map/Map.vue'),
                 //     meta: {
@@ -166,7 +165,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'liquidFill',
+                //     path: '/liquidFill',
                 //     name: 'LiquidFill',
                 //     component: () => import('@/views/ECharts/Basic/pages/LiquidFill/LiquidFill.vue'),
                 //     meta: {
@@ -175,7 +174,7 @@ export default { // ECharts
                 //     }
                 // },
                 // {
-                //     path: 'wordCloud',
+                //     path: '/wordCloud',
                 //     name: 'WordCloud',
                 //     component: () => import('@/views/ECharts/Basic/pages/WordCloud/WordCloud.vue'),
                 //     meta: {

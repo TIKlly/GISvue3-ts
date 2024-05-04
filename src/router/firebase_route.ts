@@ -10,13 +10,12 @@ export default {
     },
     children: [
         {
-            path: "firestore",
+            path: "/firestore",
             name: "firestore",
             component: () => import("@/components/Upload.vue"),
             meta: {
                 navState: true,
                 navName: 'Firestore',
-                icon: 'location'
             }
         }
 

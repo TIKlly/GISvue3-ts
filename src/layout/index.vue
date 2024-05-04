@@ -7,14 +7,12 @@
             </el-icon>
         </el-button>
         <!-- 侧边栏（大屏幕布局） -->
-        <el-aside v-if="!isMobile" class="w-[180px]">
+        <el-aside v-if="!isMobile" width="180">
             <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
         </el-aside>
         <!-- 移动端显示 -->
-
         <el-drawer v-else direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
             <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
-
         </el-drawer>
         <!-- 内容区域 -->
         <el-container>
@@ -45,6 +43,9 @@ const routesList: any = computed(() => {
     // return router.options.routes as Route[]
 })
 
+
+console.log(router.options.routes);
+
 onMounted(() => {
     handleResize()
     window.addEventListener('resize', handleResize)
@@ -59,6 +60,9 @@ function handleResize() {
 const currentPath = computed(() => {
     return route.path
 })
+
+
+console.log(currentPath.value);
 
 function toggleDrawer() {
     // isMobile.value = !isMobile.value

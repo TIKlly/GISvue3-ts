@@ -1,15 +1,14 @@
 <template>
   <div>
     <startPage />
-    <Layout />
-    <!-- <WindowTest></WindowTest> -->
+    <!-- <Layout /> -->
+
+    <RouterView></RouterView>
   </div>
 </template>
 
 <script setup lang="ts">
-import Layout from "@/layout/index.vue"
 import startPage from "./components/startPage.vue";
-// import WindowTest from "./components/windowTest.vue";
 
 
 

@@ -28,7 +28,7 @@ import {
 } from '@element-plus/icons-vue'
 // import { customHttpRequest } from '@/util/firebaseUploader'; // 替换为你的具体路径
 import type { UploadInstance } from 'element-plus'
-import { storage } from "@/util/firebase"; // 替换为你的 firebase.ts 文件路径
+import { storage } from '../../firebase'
 import { ref as storageRef, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
 
 const format = (percentage: number) => (percentage === 100 ? 'Complete' : `${percentage}%`)

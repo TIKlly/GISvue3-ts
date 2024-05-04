@@ -1,5 +1,5 @@
 // firebaseUploader.ts
-import { storage } from "./firebase"; // 替换为你的 firebase.ts 文件路径
+import { storage } from "../../firebase"; // 替换为你的 firebase.ts 文件路径
 import { ref as storageRef, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
 
 interface FileUploadResult {

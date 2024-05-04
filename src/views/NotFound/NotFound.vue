@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="   m-auto">
         NotFound 404
     </div>
 </template>
