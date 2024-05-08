@@ -10,7 +10,6 @@ import antvX6 from './antvX6.ts'
 import testRoutes from './testRoutes'
 import Orgtree from "./orgtree";
 import Rirebase from "./firebase_route.ts"
-
 import dataScreen from './dataScreen-route.ts'
 
 const Index = () => import("@/layout/index.vue")
@@ -27,7 +26,7 @@ export const routes = [
         },
         children: [
             {
-                path: '',
+                path: '/home',
                 name: 'Home',
                 component: Home,
             },
@@ -38,6 +37,15 @@ export const routes = [
             echartsRoutes,
             olRoutes,
             Orgtree,
+            {
+                path: '/about',
+                name: 'About',
+                component: () => import('../views/About/About.vue'),
+                meta: {
+                    navState: true,
+                    navName: 'About us',
+                }
+            }
         ]
     },
     dataScreen,
@@ -46,5 +54,6 @@ export const routes = [
         name: 'NotFound',
         component: () => import('../views/NotFound/NotFound.vue')
     },
-    { path: '/login', name: 'login', component: () => import("@/views/login/index.vue") }
+    { path: '/login', name: 'login', component: () => import("@/views/login/index.vue") },
+
 ]

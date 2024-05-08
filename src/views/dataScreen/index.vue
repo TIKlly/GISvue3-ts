@@ -1,5 +1,5 @@
 <template>
-  <div class="  w-screen h-screen">  
+  <div class="  w-screen h-screen">
     <div class="dataScreen-container ">
       <div class="dataScreen-content" ref="dataScreenRef">
         <div class="dataScreen-header">
@@ -8,8 +8,8 @@
           </div>
           <div class="header-ct">
             <div class="header-ct-title">
-              <!-- <span>可视化大数据展示平台</span>
-              <div class="header-ct-warning">平台高峰预警信息（2条）</div> -->
+              <span>可视化大数据展示平台</span>
+              <div class="header-ct-warning">平台高峰预警信息（2条）</div>
             </div>
           </div>
           <div class="header-ri">

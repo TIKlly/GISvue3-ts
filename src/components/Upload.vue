@@ -17,7 +17,9 @@
       </template>
     </el-upload>
     <el-progress :percentage="percentage" :format="format" />
+    <div class=" m-3  bg-slate-800 h-[500px]">
 
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,8 @@ import {
 } from '@element-plus/icons-vue'
 // import { customHttpRequest } from '@/util/firebaseUploader'; // 替换为你的具体路径
 import type { UploadInstance } from 'element-plus'
+
+import { ElMessage } from 'element-plus';
 import { storage } from '../../firebase'
 import { ref as storageRef, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
 
@@ -47,6 +51,7 @@ const handleSuccess = () => {
   // el-upload 组件的成功回调留空，因为我们手动处理了上传逻辑
 };
 const handleError = (error: any) => {
+  ElMessage(`文件上传失败: ${error.message}`)
   console.error(`文件上传失败: ${error.message}`);
 };
 
@@ -84,6 +89,7 @@ const customHttpRequest = async (files: File[]): Promise<FileUploadResult[]> => 
     throw new Error(`文件上传失败：${error.message}`);
   }
 };
+
 
 
 

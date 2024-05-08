@@ -21,6 +21,15 @@
             </el-header>
             <el-main :style="{ padding: contentPadding }">
                 <RouterView></RouterView>
+                <!-- <router-view v-slot="{ Component, route }">
+                    <span>path</span>
+                    <h2 v-if="route.fullPath != '/'">{{ route.fullPath }}</h2>
+                    <transition appear name="fade-transform" mode="out-in">
+                        <keep-alive>
+                            <component :is="Component" v-if="isRouterShow" :key="route.fullPath" />
+                        </keep-alive>
+                    </transition>
+                </router-view> -->
             </el-main>
         </el-container>
     </el-container>
@@ -40,11 +49,13 @@ const drawer = ref(false)
 const router = useRouter()
 const routesList: any = computed(() => {
     return filterRoutes(router.options.routes as Route[])
-    // return router.options.routes as Route[]
 })
 
+// const isRouterShow = ref(true);
+// const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
+// provide("refresh", refreshCurrentPage);
 
-console.log(router.options.routes);
+console.log(routesList.value);
 
 onMounted(() => {
     handleResize()
@@ -62,16 +73,14 @@ const currentPath = computed(() => {
 })
 
 
-console.log(currentPath.value);
+// console.log(currentPath.value);
 
 function toggleDrawer() {
     // isMobile.value = !isMobile.value
     drawer.value = true
-
-    console.log(isMobile.value, drawer.value);
+    // console.log(isMobile.value, drawer.value);
     // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
 }
-
 // 使用计算属性动态计算内容区域的内边距
 const contentPadding = computed(() => isMobile.value ? '20px' : '40px')
 </script>

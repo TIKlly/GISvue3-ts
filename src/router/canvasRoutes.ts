@@ -10,7 +10,7 @@ export default {
   },
   children: [
     {
-      path: '/canvas-demo',
+      path: '/canvas/canvas-demo',
       name: 'CanvasDemo',
       component: () => import('@/views/Canvas/Demo/index.vue'),
       meta: {
@@ -19,7 +19,7 @@ export default {
       },
       children: [
         {
-          path: '/canvas-demo-bubble',
+          path: '/canvas/canvas-demo/canvas-demo-bubble',
           name: 'CanvasDemoBubble',
           component: () => import('@/views/Canvas/Demo/pages/Bubble/Bubble.vue'),
           meta: {
@@ -29,7 +29,7 @@ export default {
         },
         {
 
-          path: '/canvas-demo-line',
+          path: '/canvas/canvas-demo/canvas-demo-line',
           name: 'CanvasDemoLine',
           component: () => import('@/views/Canvas/Demo/pages/Line/Line.vue'),
           meta: {

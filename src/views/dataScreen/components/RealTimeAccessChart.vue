@@ -1,7 +1,7 @@
 <template>
   <!-- 实时访问 -->
   <div class="actual-total">
-    <div class="expect-total">可预约总量<i>0</i>人</div>
+    <div class="expect-total">可预约总量<i>999999999</i>人</div>
     <div class="actual-total">
       <div v-for="(item, index) in actualTotal.split('')" :key="index" class="actual-item">
         {{ item }}
@@ -19,7 +19,7 @@ import { ref } from "vue";
 import { ECOption } from "@/components/ECharts/config";
 import ECharts from "@/components/ECharts/index.vue";
 
-const actualTotal = ref("0");
+const actualTotal = ref("315646");
 const option = {
   title: [
     {
@@ -181,6 +181,7 @@ const option = {
   width: 100%;
   height: calc(100% - 50px);
 }
+
 .actual-total {
   position: relative;
   display: flex;
@@ -189,6 +190,7 @@ const option = {
   height: 50px;
   margin-top: 10px;
   margin-right: 4px;
+
   .actual-item {
     display: flex;
     align-items: center;
@@ -201,17 +203,20 @@ const option = {
     color: #66ffff;
     background: url("../images/total.png") no-repeat;
     background-size: 100% 100%;
+
     &:last-child {
       margin-right: 0;
       font-size: 22px;
     }
   }
+
   .expect-total {
     position: absolute;
     top: -30px;
     right: 5px;
     font-size: 14px;
     color: #ffffff;
+
     i {
       font-style: normal;
       font-style: oblique;

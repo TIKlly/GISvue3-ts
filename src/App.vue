@@ -2,7 +2,6 @@
   <div>
     <startPage />
     <!-- <Layout /> -->
-
     <RouterView></RouterView>
   </div>
 </template>

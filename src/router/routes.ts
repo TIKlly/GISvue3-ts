@@ -33,5 +33,14 @@ export const routes = [
         name: 'NotFound',
         component: () => import('../views/NotFound/NotFound.vue')
     },
-    { path: '/login', name: 'login', component: () => import("@/views/login/index.vue") }
+    { path: '/login', name: 'login', component: () => import("@/views/login/index.vue") },
+    {
+        path: '/about',
+        name: 'About',
+        component: () => import('../views/About/About.vue'),
+        meta: {
+            navState: true,
+            navName: 'About us',
+        }
+    }
 ]
