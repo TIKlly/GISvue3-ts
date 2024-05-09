@@ -2,58 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.97);
+    background-color: #242424;
 
-html {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
-/* 自定义全局样式 */
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+
+a:hover {
+    color: #535bf2;
+}
+
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Roboto', sans-serif;
-    /* 使用 Roboto 字体 */
-    background-color: rgb(250, 250, 247);
-    /* 设置背景色 */
+    height: 100vh;
+    /* background-color: #131520; */
+    min-height: 100vh;
+
 }
 
-.container {
-    max-width: 1200px;
-    /* 最大宽度为 1200px */
-    margin: 0 auto;
-    /* 居中 */
-    padding: 0 20px;
-    /* 左右边距为 20px */
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
 }
 
-/* 响应式布局 */
-@media (max-width: 767px) {
-    html {
-        font-size: 14px;
-    }
-
-    /* 在小屏幕设备上设置较小的字体大小 */
-    /* 小屏幕样式 */
-    .container {
-        padding: 0 10px;
-        /* 左右边距为 10px */
-    }
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
 }
 
-/* 适配移动设备 */
-@media (max-width: 640px) {
+button:hover {
+    border-color: #646cff;
+}
 
-    /* 移动设备样式 */
-    .container {
-        padding: 0 5px;
-        /* 左右边距为 5px */
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: #ffffff;
     }
 
-    html {
-        font-size: 12px;
-        /* 在移动设备上设置最小的字体大小 */
+    a:hover {
+        color: #747bff;
+    }
+
+    button {
+        background-color: #f9f9f9;
     }
 }
