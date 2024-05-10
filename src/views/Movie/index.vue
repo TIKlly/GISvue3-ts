@@ -1,19 +1,14 @@
 <template>
-    <div class="bg-slate-950  h-screen">
+    <div class="bg-slate-950 w-screen  h-screen">
         <Header />
-        <Slider />
-        <ProductionHouse />
+        <!-- <ProductionHouse /> -->
+        <RouterView></RouterView>
     </div>
 </template>
 
 <script setup lang="ts">
 
 import Header from './components/Header.vue';
-import Slider from './components/Slider.vue';
-
-import ProductionHouse from './components/ProductionHouse.vue';
-
-
 
 </script>
 

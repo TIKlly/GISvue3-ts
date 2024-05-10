@@ -1,7 +1,16 @@
 <template>
   <div>
-    <el-upload ref="uploadRef" :auto-upload="false" class="upload-demo" drag :before-upload="beforeUpload"
-      :on-success="handleSuccess" :on-error="handleError" :http-request="customHttpRequesthandler" multiple>
+    <el-upload
+      ref="uploadRef"
+      :auto-upload="false"
+      class="upload-demo"
+      drag
+      :before-upload="beforeUpload"
+      :on-success="handleSuccess"
+      :on-error="handleError"
+      :http-request="customHttpRequesthandler"
+      multiple
+    >
       <el-icon class="el-icon--upload"><upload-filled /></el-icon>
       <div class="el-upload__text">
         Drop file here or <em>click to upload</em>
@@ -17,28 +26,30 @@
       </template>
     </el-upload>
     <el-progress :percentage="percentage" :format="format" />
-    <div class=" m-3  bg-slate-800 h-[500px]">
-
-    </div>
+    <div class="m-3 bg-slate-800 h-[500px]"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import {
-  UploadFilled
-} from '@element-plus/icons-vue'
+import { ref } from "vue";
+import { UploadFilled } from "@element-plus/icons-vue";
 // import { customHttpRequest } from '@/util/firebaseUploader'; // 替换为你的具体路径
-import type { UploadInstance } from 'element-plus'
+import type { UploadInstance } from "element-plus";
 
-import { ElMessage } from 'element-plus';
-import { storage } from '../../firebase'
-import { ref as storageRef, uploadBytesResumable, getDownloadURL, UploadTaskSnapshot } from 'firebase/storage';
+import { ElMessage } from "element-plus";
+import { storage } from "../../firebase";
+import {
+  ref as storageRef,
+  uploadBytesResumable,
+  getDownloadURL,
+  UploadTaskSnapshot,
+} from "firebase/storage";
 
-const format = (percentage: number) => (percentage === 100 ? 'Complete' : `${percentage}%`)
-const percentage = ref<number>(0)
+const format = (percentage: number) =>
+  percentage === 100 ? "Complete" : `${percentage}%`;
+const percentage = ref<number>(0);
 
-const uploadRef = ref<UploadInstance>()
+const uploadRef = ref<UploadInstance>();
 const files = ref<File[]>([]);
 const beforeUpload = (file: File) => {
   // 在这里添加你的文件验证逻辑
@@ -51,7 +62,7 @@ const handleSuccess = () => {
   // el-upload 组件的成功回调留空，因为我们手动处理了上传逻辑
 };
 const handleError = (error: any) => {
-  ElMessage(`文件上传失败: ${error.message}`)
+  ElMessage(`文件上传失败: ${error.message}`);
   console.error(`文件上传失败: ${error.message}`);
 };
 
@@ -62,20 +73,21 @@ const customHttpRequesthandler = async () => {
   } catch (error) {
     console.error(error);
   }
-
-}
+};
 
 // 手动上传
 const submitUpload = () => {
-  uploadRef.value!.submit()
-}
+  uploadRef.value!.submit();
+};
 // firebase
 interface FileUploadResult {
   fileName: string;
   downloadURL: string;
 }
 
-const customHttpRequest = async (files: File[]): Promise<FileUploadResult[]> => {
+const customHttpRequest = async (
+  files: File[]
+): Promise<FileUploadResult[]> => {
   if (files.length === 0) {
     return [];
   }
@@ -90,9 +102,6 @@ const customHttpRequest = async (files: File[]): Promise<FileUploadResult[]> => 
   }
 };
 
-
-
-
 const storeImage = (file: File): Promise<FileUploadResult> => {
   return new Promise((resolve, reject) => {
     const fileName = `${new Date().getTime()}_${file.name}`;
@@ -100,11 +109,12 @@ const storeImage = (file: File): Promise<FileUploadResult> => {
     const uploadTask = uploadBytesResumable(newStorageRef, file);
 
     uploadTask.on(
-      'state_changed',
+      "state_changed",
       (snapshot: UploadTaskSnapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         // console.log(`上传进度：${progress.toFixed(2)}%`);
-        percentage.value = Number(progress.toFixed(2))
+        percentage.value = Number(progress.toFixed(2));
       },
       (error) => {
         reject(error);
@@ -122,14 +132,7 @@ const storeImage = (file: File): Promise<FileUploadResult> => {
   });
 };
 
-
 // firebase所有文件
-
-
-
-
-
-
 </script>
 
 <style lang="less" scoped></style>

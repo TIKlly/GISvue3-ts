@@ -21,6 +21,8 @@ buileder/
 .firebase
 firebase*
 
+/src/views/Movie/components/GlobalApi.ts
+
 #  Editor directories and files
 
 .firebase

@@ -58,6 +58,43 @@ export const routes = [
       navState: true,
       navName: "M页面",
     },
+    children: [
+      {
+        path: "/moviespage/one",
+        name: "HOME",
+        component: () =>
+          import("../views/Movie/components/ProductionHouse.vue"),
+      },
+      {
+        path: "/moviespage/two",
+        name: "SEARCH",
+        component: () => import("../views/Movie/components/Searchpage.vue"),
+      },
+      {
+        path: "/moviespage/three",
+        name: "WATCH LIST",
+        component: () =>
+          import("../views/Movie/components/ProductionHouse.vue"),
+      },
+      {
+        path: "/moviespage/four",
+        name: "ORIGINALS",
+        component: () =>
+          import("../views/Movie/components/ProductionHouse.vue"),
+      },
+      {
+        path: "/moviespage/five",
+        name: "MOVIES",
+        component: () =>
+          import("../views/Movie/components/ProductionHouse.vue"),
+      },
+      {
+        path: "/moviespage/six",
+        name: "SERIES",
+        component: () =>
+          import("../views/Movie/components/ProductionHouse.vue"),
+      },
+    ],
   },
   {
     // 404

@@ -1,7 +1,7 @@
 <template>
     <div class="  m-2 p-2 w-96 h-32 bg-green-200  align-middle">
-        {{ Ip }}--{{ deviceModel }}--{{ Address }}
-    </div>
+    {{ Ip }}--{{ deviceModel }}--{{ Address }}
+  </div>
 </template>
 
 <script setup lang="ts">
