@@ -1,25 +1,19 @@
 <template>
-  <el-container>
+  <el-container class=" relative">
     <!-- 侧边栏按钮（仅在移动端显示） -->
-    <el-button v-if="isMobile" type="primary" @click="toggleDrawer">
+    <el-button class=" absolute top-4 left-2" type="info" @click="toggle">
       <el-icon>
         <Operation />
       </el-icon>
     </el-button>
     <!-- 侧边栏（大屏幕布局） -->
-    <el-aside v-if="!isMobile" width="180">
-      <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
+    <el-aside width="180" v-if="!isMobile">
+      <RootNav :currentPath="currentPath" :routesList="routesList" :isCollapse="isMobile" />
     </el-aside>
     <!-- 移动端显示 -->
-    <el-drawer
-      v-else
-      direction="ltr"
-      v-model="drawer"
-      title="I am the title"
-      :with-header="false"
-    >
+    <!-- <el-drawer v-else direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
       <RootNav :currentPath="currentPath" :routesList="routesList"></RootNav>
-    </el-drawer>
+    </el-drawer> -->
     <!-- 内容区域 -->
     <el-container>
       <el-header>
@@ -51,7 +45,6 @@ import { useRouter } from "vue-router";
 import { Route, filterRoutes } from "@/hooks/routeTool/filtterRoutes";
 const route = useRoute();
 const isMobile = ref<boolean | any>(false);
-const drawer = ref(false);
 const router = useRouter();
 const routesList: any = computed(() => {
   return filterRoutes(router.options.routes as Route[]);
@@ -61,7 +54,6 @@ const routesList: any = computed(() => {
 // const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 // provide("refresh", refreshCurrentPage);
 
-console.log(routesList.value);
 
 onMounted(() => {
   handleResize();
@@ -77,13 +69,10 @@ const currentPath = computed(() => {
   return route.path;
 });
 
-// console.log(currentPath.value);
+// 切换是否显示 aside
+function toggle() {
+  isMobile.value = !isMobile.value
 
-function toggleDrawer() {
-  // isMobile.value = !isMobile.value
-  drawer.value = true;
-  // console.log(isMobile.value, drawer.value);
-  // 在移动端不再使用侧边栏，因此不需要相关的逻辑了
 }
 // 使用计算属性动态计算内容区域的内边距
 const contentPadding = computed(() => (isMobile.value ? "20px" : "40px"));

@@ -1,9 +1,13 @@
 <template>
-    <div class="flex justify-center items-center h-[80%]">
-        <!-- <iframe src="https://lottie.host/embed/74a3188f-30e9-40a1-a7ac-969c7f4a8ddb/eUXDhTitLS.json"></iframe> -->
-        <img class="h-[500px]" src="@/assets/images/login_left3.png" alt="">
-        <!-- <svg src="@/assets/images/Animation - 1697770821211.json"></svg> -->
-        <!-- <canvas ref="canvas" class="w-[50%] h-[100%]" width="400" height="400"></canvas> -->
+    <div class="flex justify-center items-center bg-black  border-[2px] border-gray-600
+            rounded-lg  hover:scale-95 transition-all duration-300
+            ease-in-out cursor-pointer relative shadow-xl 
+            shadow-gray-800 ">
+        <img class=" h-[600px]  w-full   object-contain opacity-100 z-0    max-md:h-96" src="@/assets/images/logo.png"
+            alt="">
+        <video src='@/assets/Videos/star-wars.mp4' autoPlay loop playsInline muted class='absolute z-1  object-cover h-[600px]  max-md:h-96 w-full top-0 rounded-md 
+            opacity-0 hover:opacity-90' />
+
     </div>
 </template>
 
@@ -24,7 +28,6 @@ onMounted(() => {
 
 function drawFace() {
     if (!ctx || !canvas.value) return;
-
     const canvasWidth = canvas.value.width;
     const canvasHeight = canvas.value.height;
 

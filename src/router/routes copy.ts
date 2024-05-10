@@ -23,7 +23,7 @@ export const routes = [
     meta: {
       navState: true,
       navName: "首页",
-      navIcon: "Home",
+      icon: "HomeFilled",
     },
     children: [
       {
@@ -57,6 +57,7 @@ export const routes = [
     meta: {
       navState: true,
       navName: "M页面",
+      icon: "HelpFilled",
     },
     children: [
       {

@@ -7,8 +7,8 @@
     <div class="root__header__main">
       <h2 class="root__header__title " @click="toHome">前端可视化及桌面应用</h2>
       <div class="repository__x">
-        <el-tooltip class="repository__item" content="...." placement="bottom" effect="light">
-          
+        <el-tooltip class="repository__item" content="changeMenu" placement="bottom" effect="light">
+          <el-button @click="changeMenu">Tik</el-button>
         </el-tooltip>
       </div>
     </div>
@@ -26,8 +26,6 @@ const router = useRouter()
 
 const isCollapse = ref(RootBus.isCollapse)
 function changeMenu() {
-  // console.log(bus.$emit)
-  // RootBus.$emit("change-menu-isCollapse");
   RootBus.isCollapse.value = !RootBus.isCollapse.value
 }
 
