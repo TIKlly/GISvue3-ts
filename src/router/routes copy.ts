@@ -53,6 +53,7 @@ export const routes = [
   {
     path: "/moviespage",
     name: "movies",
+    redirect: "/moviespage/one",
     component: () => import("../views/Movie/index.vue"),
     meta: {
       navState: true,

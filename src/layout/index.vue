@@ -1,11 +1,7 @@
 <template>
-  <el-container class=" relative">
+  <el-container>
     <!-- 侧边栏按钮（仅在移动端显示） -->
-    <el-button class=" absolute top-4 left-2" type="info" @click="toggle">
-      <el-icon>
-        <Operation />
-      </el-icon>
-    </el-button>
+
     <!-- 侧边栏（大屏幕布局） -->
     <el-aside width="180" v-if="!isMobile">
       <RootNav :currentPath="currentPath" :routesList="routesList" :isCollapse="isMobile" />
@@ -17,7 +13,13 @@
     <!-- 内容区域 -->
     <el-container>
       <el-header>
-        <RootHeader></RootHeader>
+        <RootHeader>
+          <el-button v-if="isMobile" class=" text-green-300" @click="toggle" :isMobile="isMobile">
+            <el-icon>
+              <Operation />
+            </el-icon>
+          </el-button>
+        </RootHeader>
       </el-header>
       <el-main :style="{ padding: contentPadding }">
         <RouterView></RouterView>
@@ -45,6 +47,7 @@ import { useRouter } from "vue-router";
 import { Route, filterRoutes } from "@/hooks/routeTool/filtterRoutes";
 const route = useRoute();
 const isMobile = ref<boolean | any>(false);
+// const drawer = ref(false)
 const router = useRouter();
 const routesList: any = computed(() => {
   return filterRoutes(router.options.routes as Route[]);

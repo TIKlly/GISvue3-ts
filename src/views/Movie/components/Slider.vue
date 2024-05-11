@@ -11,16 +11,19 @@ import GlobalApi from './GlobalApi';
 import Swiper from './Swiper.vue';
 
 const list = ref()
+
+// 获取电影列表
 const getTrendingMovies = () => {
     GlobalApi.getTrendingVideos.then(resp => {
-        console.log(resp.data.results, '00');
         list.value = resp.data.results
     })
 }
 
+// 初始电影列表
 onMounted(() => {
     getTrendingMovies()
 })
+
 
 </script>
 

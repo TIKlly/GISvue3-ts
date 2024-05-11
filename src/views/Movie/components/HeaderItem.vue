@@ -5,7 +5,7 @@
         <el-icon>
             <component :is="item.icon"></component>
         </el-icon>
-        <span>{{ item.name }}</span>
+        <span class="max-md:hidden">{{ item.name }}</span>
     </div>
 </template>
 

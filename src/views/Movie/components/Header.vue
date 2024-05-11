@@ -3,14 +3,14 @@
         <div class=" flex  gap-8  items-center">
             <img src="@/assets/images/logo.png" class="w-[80px] 
         md:w-[115px] object-cover'" alt="Img">
-            <div class="hidden md:flex gap-5">
+            <div class="  pt-2 flex md:flex gap-5 ">
                 <HeaderItem :menu="menu" />
-
             </div>
         </div>
-        <img src="@/assets/images/Agumon.png" className='w-[40px] h-[40px] rounded-full  mr-10' />
-        <!-- <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745"
-            className='w-[40px] rounded-full  mr-10' /> -->
+        <div @click=" $router.push('/')">
+            <img src="@/assets/images/nationalG.png"
+                class='w-[30px] h-[30px] rounded-full  ml-8  border-4 border-solid border-blue-300 outline-none  max-md:border-0 max-md:ml-0' />
+        </div>
     </div>
     <Slider v-if="$route.path == '/moviespage/one'" />
 </template>

@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <div class="card mb10">
+    <div class=" font-mono font-medium text-sm">
+        <!-- <div class="card mb10">
             <h4 class="title">简介</h4>
             <span class="text">
-                <span>hello</span>
+                <span>关于运用到的所用环境依赖</span>
             </span>
-        </div>
+        </div> -->
         <div class="card mb10">
             <h4 class="title">项目信息</h4>
             <el-descriptions :column="2" border>

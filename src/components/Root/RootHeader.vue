@@ -5,16 +5,22 @@
       isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'
     ]" @click="changeMenu"></i>
     <div class="root__header__main">
-      <h2 class="root__header__title " @click="toHome">前端可视化及桌面应用</h2>
+      <div>
+        <slot class=""></slot>
+        <h2 class=" max-md:hidden " @click="toHome">前端可视化及桌面应用</h2>
+
+      </div>
+      <h2 class=" md:hidden  text-sm font-mono" @click="toHome">前端可视化及桌面应用</h2>
       <div class="repository__x">
         <el-tooltip class="repository__item" content="changeMenu" placement="bottom" effect="light">
-          <el-button @click="changeMenu">Tik</el-button>
+          <el-button class=" font-black text-lg  font-mono" :round="true" @click="changeMenu">
+            T
+          </el-button>
         </el-tooltip>
       </div>
     </div>
   </header>
 </template>
-
 
 
 <script setup lang="ts">
