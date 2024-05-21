@@ -15,8 +15,8 @@
 <script setup lang="ts">
 const props = defineProps({
   title: String,
-  value: String
-})
+  value: String,
+});
 </script>
 
 <style lang="scss" scoped>

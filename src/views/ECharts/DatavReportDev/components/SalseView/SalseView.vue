@@ -3,7 +3,12 @@
     <el-card shadow="hover" :body-style="{ padding: '0 0 20px 0' }">
       <template #header>
         <div class="menu__wrapper">
-          <el-menu mode="horizontal" :default-active="activeIndex" @select="onMenuSelect" class="sales__view__menu">
+          <el-menu
+            mode="horizontal"
+            :default-active="activeIndex"
+            @select="onMenuSelect"
+            class="sales__view__menu"
+          >
             <el-menu-item index="1">销售额</el-menu-item>
             <el-menu-item index="2">访问量</el-menu-item>
           </el-menu>
@@ -14,9 +19,17 @@
               <el-radio-button label="本月"></el-radio-button>
               <el-radio-button label="今年"></el-radio-button>
             </el-radio-group>
-            <el-date-picker class="salse__view__date__picker" size="small" v-model="datePicker.date" type="daterange"
-              unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
-              :shortcuts="datePicker.shortcuts">
+            <el-date-picker
+              class="salse__view__date__picker"
+              size="small"
+              v-model="datePicker.date"
+              type="daterange"
+              unlink-panels
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :shortcuts="datePicker.shortcuts"
+            >
             </el-date-picker>
           </div>
         </div>
@@ -27,8 +40,17 @@
           <div class="sales__view__list">
             <div class="sales__view__title">排行榜</div>
             <div class="list__item__wrapper">
-              <div class="list__item" v-for="(item, index) in rankData" :key="item.no">
-                <div :class="['list__item__no', +item.no <= 3 ? 'top__no' + (index + 1) : '']">
+              <div
+                class="list__item"
+                v-for="(item, index) in rankData"
+                :key="item.no"
+              >
+                <div
+                  :class="[
+                    'list__item__no',
+                    +item.no <= 3 ? 'top__no' + (index + 1) : '',
+                  ]"
+                >
                   {{ item.no }}
                 </div>
                 <div class="list__item__name">{{ item.name }}</div>
@@ -101,7 +123,20 @@ const salseChartOption = ref({
   },
   xAxis: {
     type: "category",
-    data: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+    data: [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+    ],
     axisTick: {
       alignWithLabel: true,
       lineStyle: {
@@ -138,29 +173,23 @@ const salseChartOption = ref({
       data: [200, 250, 300, 350, 186, 462, 452, 219, 626, 437, 515, 656],
     },
   ],
-  color: new echarts.graphic.LinearGradient(
-    0, 0, 0, 1,
-    [
-      { offset: 0, color: "#fa709a" },
-      { offset: 1, color: "#fee140" }
-    ]
-  ),
+  color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+    { offset: 0, color: "#fa709a" },
+    { offset: 1, color: "#fee140" },
+  ]),
   emphasis: {
     itemStyle: {
-      color: new echarts.graphic.LinearGradient(
-        0, 0, 0, 1,
-        [
-          { offset: 0, color: "#f83600" },
-          { offset: 1, color: "#f9d423" }
-        ]
-      ),
+      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+        { offset: 0, color: "#f83600" },
+        { offset: 1, color: "#f9d423" },
+      ]),
     },
   },
   tooltip: {
-    trigger: 'axis',
+    trigger: "axis",
     axisPointer: {
-      type: 'shadow'
-    }
+      type: "shadow",
+    },
   },
   grid: {
     top: 70,

@@ -4,55 +4,63 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import { OSM } from 'ol/source'
-import * as control from 'ol/control'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import { OSM } from "ol/source";
+import * as control from "ol/control";
 // import * as olInteraction from 'ol/interaction';
-import 'ol/ol.css'
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ // 图层
+    target: "map", // 对应页面里 id 为 map 的元素
+    layers: [
+      // 图层
       new Tile({
-        source: new OSM()
-      })
+        source: new OSM(),
+      }),
     ],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326", // 坐标系，有EPSG:4326和EPSG:3 857
       center: [110.32, 20.02], // 坐标
-      zoom: 12 // 地图缩放级别（打开页面时默认级别）
+      zoom: 12, // 地图缩放级别（打开页面时默认级别）
     }),
-    controls: control.defaults().extend([ // 控件
+    controls: control.defaults().extend([
+      // 控件
       new control.OverviewMap({
-        className: 'ol-overviewmap ol-custom-overviewmap',
+        className: "ol-overviewmap ol-custom-overviewmap",
         layers: [
           new Tile({
-            source: new OSM({ // 使用不同样式的底图
-              'url': 'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' + '?apikey=0e6fc415256d4fbb9b5166a718591d71'
-            })
-          })
+            source: new OSM({
+              // 使用不同样式的底图
+              url:
+                "https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png" +
+                "?apikey=0e6fc415256d4fbb9b5166a718591d71",
+            }),
+          }),
         ],
-        collapseLabel: '\u00BB',
-        label: '\u00AB',
-        collapsed: false
-      })
+        collapseLabel: "\u00BB",
+        label: "\u00AB",
+        collapsed: false,
+      }),
     ]),
-  })
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/OverviewMap/OverviewMap.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/OverviewMap/OverviewMap.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

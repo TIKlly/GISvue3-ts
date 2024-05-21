@@ -1,4 +1,3 @@
-import http from "@/util/request"
+import http from "@/util/request";
 
-
-export const logoutApi = () => http.post("/logout", {})
+export const logoutApi = () => http.post("/logout", {});

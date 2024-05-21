@@ -1,10 +1,12 @@
 <template>
-  <div class="  w-screen h-screen">
-    <div class="dataScreen-container ">
+  <div class="w-screen h-screen">
+    <div class="dataScreen-container">
       <div class="dataScreen-content" ref="dataScreenRef">
         <div class="dataScreen-header">
           <div class="header-lf">
-            <span class="header-screening" @click="router.push(HOME_URL)">首页</span>
+            <span class="header-screening" @click="router.push(HOME_URL)"
+              >首页</span
+            >
           </div>
           <div class="header-ct">
             <div class="header-ct-title">

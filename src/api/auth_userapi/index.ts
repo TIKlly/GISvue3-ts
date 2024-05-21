@@ -1,6 +1,4 @@
-
 import http from "@/util/request";
-
 
 export const userLogin = (data: LoginType) => http.post("/login", data);
 

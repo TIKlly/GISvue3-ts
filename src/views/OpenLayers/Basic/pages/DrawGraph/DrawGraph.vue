@@ -2,96 +2,100 @@
 <template>
   <div id="map" class="map__x"></div>
   <select id="type" v-model="tool" @change="addInteraction">
-    <option v-for="item in tools" :key="item.value" :value="item.value">{{ item.label }}</option>
+    <option v-for="item in tools" :key="item.value" :value="item.value">
+      {{ item.label }}
+    </option>
   </select>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import LayerVector from 'ol/layer/Vector'
-import SourceVector from 'ol/source/Vector'
-import Draw, { createRegularPolygon, createBox } from 'ol/interaction/Draw'
-import Polygon from 'ol/geom/Polygon'
-import 'ol/ol.css'
+import { ref, reactive, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import LayerVector from "ol/layer/Vector";
+import SourceVector from "ol/source/Vector";
+import Draw, { createRegularPolygon, createBox } from "ol/interaction/Draw";
+import Polygon from "ol/geom/Polygon";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const tool = ref('Hexagram')
-const tools = reactive([ // 工具集
+const tool = ref("Hexagram");
+const tools = reactive([
+  // 工具集
   {
-    value: 'Circle',
-    label: '圆'
+    value: "Circle",
+    label: "圆",
   },
   {
-    value: 'Square',
-    label: '方形'
+    value: "Square",
+    label: "方形",
   },
   {
-    value: 'Rectangle',
-    label: '矩形'
+    value: "Rectangle",
+    label: "矩形",
   },
   {
-    value: 'Hexagram',
-    label: '六芒星'
+    value: "Hexagram",
+    label: "六芒星",
   },
   {
-    value: 'None',
-    label: '无'
-  }
-])
+    value: "None",
+    label: "无",
+  },
+]);
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 // 底图
 const raster = new Tile({
-  source: new OSM()
-})
+  source: new OSM(),
+});
 
 const source = new SourceVector({
-  wrapX: false // 禁止横向无限重复（底图渲染的时候会横向无限重复），设置了这个属性，可以让绘制的图形不跟随底图横向无限重复
-})
+  wrapX: false, // 禁止横向无限重复（底图渲染的时候会横向无限重复），设置了这个属性，可以让绘制的图形不跟随底图横向无限重复
+});
 
 const vector = new LayerVector({
-  source: source
-})
+  source: source,
+});
 
 function initMap() {
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
+    target: "map", // 对应页面里 id 为 map 的元素
     layers: [raster, vector],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326",
       center: [113.1206, 23.034996],
-      zoom: 10
-    })
-  })
+      zoom: 10,
+    }),
+  });
 
-  addInteraction()
+  addInteraction();
 }
 
-const draw = ref<Draw | undefined>(undefined)
+const draw = ref<Draw | undefined>(undefined);
 
 function addInteraction() {
   if (draw.value !== null) {
-    map.value!.removeInteraction(draw.value as Draw)
+    map.value!.removeInteraction(draw.value as Draw);
   }
-  if (tool.value !== 'None') {
+  if (tool.value !== "None") {
     // @ts-ignore
-    let geometryFunction
-    let type = 'Circle'
+    let geometryFunction;
+    let type = "Circle";
 
-    if (tool.value === 'Square') {
+    if (tool.value === "Square") {
       // 方形
-      geometryFunction = createRegularPolygon(4)
-    } else if (tool.value === 'Rectangle') {
+      geometryFunction = createRegularPolygon(4);
+    } else if (tool.value === "Rectangle") {
       // 矩形
-      geometryFunction = createBox()
-    } else if (tool.value === 'Hexagram') {
+      geometryFunction = createBox();
+    } else if (tool.value === "Hexagram") {
       geometryFunction = function (coordinates: any[], geometry: Polygon) {
         //中心点
         var center = coordinates[0];
@@ -109,7 +113,7 @@ function addInteraction() {
         var numPoints = 12;
         for (var i = 0; i < numPoints; ++i) {
           //顶点相对转过的角度
-          var angle = rotation + i * 2 * Math.PI / numPoints;
+          var angle = rotation + (i * 2 * Math.PI) / numPoints;
           //确定凸顶点和凹顶点
           var fraction = i % 2 === 0 ? 1 : 0.58;
           //计算顶点的坐标
@@ -124,22 +128,24 @@ function addInteraction() {
           geometry.setCoordinates([newCoordinates]);
         }
         return geometry;
-      }
+      };
     }
 
     draw.value = new Draw({
       source: source,
       type: type as any,
-      geometryFunction: type as any
-    })
-    map.value!.addInteraction(draw.value as Draw)
+      geometryFunction: type as any,
+    });
+    map.value!.addInteraction(draw.value as Draw);
   }
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/DrawGraph/DrawGraph.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/DrawGraph/DrawGraph.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

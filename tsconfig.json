@@ -16,7 +16,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@":["./src"]
+      "@": ["./src"]
     },
 
     /* Linting */
@@ -26,14 +26,17 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-  // "auto-imports.d.ts",
-  // "components.d.ts",
-  "src/**/*.ts", 
-  "src/**/*.d.ts",
-   "src/**/*.tsx", 
-   "src/**/*.vue",
-  //  "typings",
-   "electron-main/**/*.ts",
-  "electron-preload/**/*.ts", "firebase.ts", "firebase.ts"],
+    // "auto-imports.d.ts",
+    // "components.d.ts",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    //  "typings",
+    "electron-main/**/*.ts",
+    "electron-preload/**/*.ts",
+    "firebase.ts",
+    "firebase.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

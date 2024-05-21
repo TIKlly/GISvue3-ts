@@ -3,7 +3,9 @@
     <template #header>
       <div class="card__header">
         <div class="card__header__title">{{ title }}</div>
-        <div class="card__header__componentPath">组件位置：{{ componentPath }}</div>
+        <div class="card__header__componentPath">
+          组件位置：{{ componentPath }}
+        </div>
       </div>
     </template>
     <template #default>
@@ -13,16 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
-import { useUserStore } from '@/stroe'
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { useUserStore } from "@/stroe";
 
-const route = useRoute()
-const store = useUserStore()
+const route = useRoute();
+const store = useUserStore();
 
-const title = computed(() => route.meta.navName)
+const title = computed(() => route.meta.navName);
 
-const componentPath = computed(() => store.getComponentPath)
+const componentPath = computed(() => store.getComponentPath);
 </script>
 
 <style lang="scss" scoped>

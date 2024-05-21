@@ -10,86 +10,90 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import BingMaps from 'ol/source/BingMaps'
-import * as control from 'ol/control'
-import 'ol/ol.css'
+import { ref, reactive, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import BingMaps from "ol/source/BingMaps";
+import * as control from "ol/control";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const scaleplate = ref('度')
+const scaleplate = ref("度");
 const scaleplateList = reactive([
   {
-    t: '度',
-    v: 'degrees'
+    t: "度",
+    v: "degrees",
   },
   {
-    t: '英制英尺',
-    v: 'imperial'
+    t: "英制英尺",
+    v: "imperial",
   },
   {
-    t: '美制英尺',
-    v: 'us'
+    t: "美制英尺",
+    v: "us",
   },
   {
-    t: '海里',
-    v: 'nautical'
+    t: "海里",
+    v: "nautical",
   },
   {
-    t: '公制',
-    v: 'metric'
-  }
-])
-const scaleLineControl = ref<control.ScaleLine | undefined>(undefined)
+    t: "公制",
+    v: "metric",
+  },
+]);
+const scaleLineControl = ref<control.ScaleLine | undefined>(undefined);
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
-  scaleLineControl.value = new control.ScaleLine()
+  scaleLineControl.value = new control.ScaleLine();
 
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ // 图层
+    target: "map", // 对应页面里 id 为 map 的元素
+    layers: [
+      // 图层
       new Tile({
         source: new BingMaps({
-          key: 'AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-',
-          imagerySet: 'Aerial'
-        })
-      })
+          key: "AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-",
+          imagerySet: "Aerial",
+        }),
+      }),
     ],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326", // 坐标系，有EPSG:4326和EPSG:3857
       center: [110.32, 20.02], // 坐标
-      zoom: 12 // 地图缩放级别（打开页面时默认级别）
+      zoom: 12, // 地图缩放级别（打开页面时默认级别）
     }),
     controls: control.defaults().extend([
-      scaleLineControl.value as any// 比例尺
-    ])
-  })
+      scaleLineControl.value as any, // 比例尺
+    ]),
+  });
 
-  setScaleLine() // 设置比例尺单位
+  setScaleLine(); // 设置比例尺单位
 }
 
 // 设置比例尺单位
 function setScaleLine() {
   // 从列表里找到当前单位
-  let unit = scaleplateList.find(item => {
-    return item.t === scaleplate.value
-  })
+  let unit = scaleplateList.find((item) => {
+    return item.t === scaleplate.value;
+  });
   // 设置单位，注意unit.v的值，必须使用这些值
   if (unit) {
-    scaleLineControl.value!.setUnits(unit.v as any)
+    scaleLineControl.value!.setUnits(unit.v as any);
   }
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/ScaleLine/ScaleLine.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/ScaleLine/ScaleLine.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

@@ -4,53 +4,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Stroke from 'ol/style/Stroke'
-import Tile from 'ol/layer/Tile'
-import Graticule from 'ol/layer/Graticule'
-import BingMaps from 'ol/source/BingMaps'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Stroke from "ol/style/Stroke";
+import Tile from "ol/layer/Tile";
+import Graticule from "ol/layer/Graticule";
+import BingMaps from "ol/source/BingMaps";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ // 图层
+    target: "map", // 对应页面里 id 为 map 的元素
+    layers: [
+      // 图层
       new Tile({
         source: new BingMaps({
-          key: 'AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-',
-          imagerySet: 'Road'
-        })
-      })
+          key: "AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-",
+          imagerySet: "Road",
+        }),
+      }),
     ],
     view: new View({
-      projection: 'EPSG:4326',
+      projection: "EPSG:4326",
       center: [114.064839, 22.548857],
-      zoom: 6
-    })
-  })
+      zoom: 6,
+    }),
+  });
 
   let graticule = new Graticule({
     strokeStyle: new Stroke({
-      color: 'rgba(255, 120, 0, .5)', // 线条颜色
+      color: "rgba(255, 120, 0, .5)", // 线条颜色
       width: 2, // 线条宽度
-      lineDash: [4] // 虚线，每隔4像素
+      lineDash: [4], // 虚线，每隔4像素
     }),
-    showLabels: true
-  })
-  graticule.setMap(map.value as Map)
+    showLabels: true,
+  });
+  graticule.setMap(map.value as Map);
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/Graticule/Graticule.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/Graticule/Graticule.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

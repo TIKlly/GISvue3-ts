@@ -86,7 +86,7 @@ interface FileUploadResult {
 }
 
 const customHttpRequest = async (
-  files: File[]
+  files: File[],
 ): Promise<FileUploadResult[]> => {
   if (files.length === 0) {
     return [];
@@ -127,7 +127,7 @@ const storeImage = (file: File): Promise<FileUploadResult> => {
           };
           resolve(result);
         });
-      }
+      },
     );
   });
 };

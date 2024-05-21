@@ -14,53 +14,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { CommonCard, echarts } from './commonCardMixin.js'
-import { EChartsType } from 'echarts';
-
+import { ref, onMounted } from "vue";
+import { CommonCard, echarts } from "./commonCardMixin.js";
+import { EChartsType } from "echarts";
 
 // echart 元素容器
-const chartDom = ref(null)
-const chart = ref<EChartsType | undefined>(undefined)
+const chartDom = ref(null);
+const chart = ref<EChartsType | undefined>(undefined);
 
 function chartInit() {
-  chart.value = echarts.init(chartDom.value)
+  chart.value = echarts.init(chartDom.value);
   chart.value.setOption({
-    color: ['#3398DB'],
+    color: ["#3398DB"],
     xAxis: {
-      type: 'category',
-      data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00'],
-      show: false
+      type: "category",
+      data: [
+        "00:00",
+        "01:00",
+        "02:00",
+        "03:00",
+        "04:00",
+        "05:00",
+        "06:00",
+        "07:00",
+        "08:00",
+        "09:00",
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+      ],
+      show: false,
     },
     yAxis: {
-      show: false
+      show: false,
     },
     series: [
       {
-        type: 'bar',
-        data: [410, 82, 200, 334, 390, 330, 220, 150, 82, 200, 134, 290, 330, 150],
-        barWidth: '60%', // 控制柱状图的宽度
+        type: "bar",
+        data: [
+          410, 82, 200, 334, 390, 330, 220, 150, 82, 200, 134, 290, 330, 150,
+        ],
+        barWidth: "60%", // 控制柱状图的宽度
         itemStyle: {
-          color: new echarts.graphic.LinearGradient(
-            0, 0, 0, 1,
-            [
-              { offset: 0, color: '#aaffff' },
-              { offset: 1, color: '#188df0' }
-            ]
-          )
-        }
-      }
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            { offset: 0, color: "#aaffff" },
+            { offset: 1, color: "#188df0" },
+          ]),
+        },
+      },
     ],
-    grid: { // 布局位置
+    grid: {
+      // 布局位置
       top: 0,
       bottom: 0,
       left: 0,
-      right: 0
-    }
-  })
+      right: 0,
+    },
+  });
 }
 
 onMounted(() => {
-  chartInit()
-})
+  chartInit();
+});
 </script>

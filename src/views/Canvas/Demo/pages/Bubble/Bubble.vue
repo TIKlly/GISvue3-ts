@@ -5,16 +5,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import bubble from './index.ts'
-import { useUserStore } from "@/stroe/index.ts"
+import { onMounted } from "vue";
+import bubble from "./index.ts";
+import { useUserStore } from "@/stroe/index.ts";
 
-const store = useUserStore()
+const store = useUserStore();
 
 onMounted(() => {
-  bubble()
-  store.setComponentPath('src/views/Canvas/Demo/pages/Bubble/Bubble.vue')
-})
+  bubble();
+  store.setComponentPath("src/views/Canvas/Demo/pages/Bubble/Bubble.vue");
+});
 </script>
 
 <style lang="scss" scoped>
@@ -26,11 +26,9 @@ onMounted(() => {
     width: 100%;
     height: 100%;
   }
-
 }
 
 @media (max-width: 640px) {
-
   /* 移动设备样式 */
   .app__home {
     width: 400px;

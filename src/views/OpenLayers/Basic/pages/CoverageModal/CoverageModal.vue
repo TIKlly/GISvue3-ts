@@ -4,40 +4,40 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   let osm = new Tile({
     preload: Infinity,
-    source: new OSM()
-  })
+    source: new OSM(),
+  });
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
+    target: "map", // 对应页面里 id 为 map 的元素
     layers: [osm],
     view: new View({
       projection: "EPSG:4326",
       center: [114.064839, 22.548857],
-      zoom: 12
-    })
-  })
+      zoom: 12,
+    }),
+  });
 
-  osm.on('postrender', (event: any) => {
+  osm.on("postrender", (event: any) => {
     const ctx = event.context!;
-    ctx!.save()
+    ctx!.save();
     const pixelRatio = event.frameState.pixelRatio;
     const size = map.value!.getSize();
     // 平移
-    ctx.translate(size![0] / 2 * pixelRatio, size![1] / 2 * pixelRatio);
+    ctx.translate((size![0] / 2) * pixelRatio, (size![1] / 2) * pixelRatio);
     //缩放
     ctx.scale(3 * pixelRatio, 3 * pixelRatio);
     //平移
@@ -53,24 +53,25 @@ function initMap() {
     ctx.clip();
     ctx.translate(75, 80);
     ctx.scale(1 / 3 / pixelRatio, 1 / 3 / pixelRatio);
-    ctx.translate(-size![0] / 2 * pixelRatio, -size![1] / 2 * pixelRatio);
-  })
+    ctx.translate((-size![0] / 2) * pixelRatio, (-size![1] / 2) * pixelRatio);
+  });
 
   // osm.on('rendercomplete', function (event: any) {
   //   const ctx = event.context;
   //   ctx.restore();
   // });
-  osm.once('postrender', function (event: any) {
+  osm.once("postrender", function (event: any) {
     const ctx = event.context;
     ctx.restore();
   });
-
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/CoverageModal/CoverageModal.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/CoverageModal/CoverageModal.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

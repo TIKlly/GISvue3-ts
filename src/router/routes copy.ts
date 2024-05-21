@@ -87,8 +87,7 @@ export const routes = [
       {
         path: "/moviespage/five",
         name: "MOVIES",
-        component: () =>
-          import("../views/Movie/components/ProductionHouse.vue"),
+        component: () => import("../views/Movie/components/MoviePage.vue"),
       },
       {
         path: "/moviespage/six",

@@ -6,26 +6,28 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as echarts from 'echarts'
-import 'echarts-liquidfill' // 引入水球图插件
+import { ref, onMounted } from "vue";
+import * as echarts from "echarts";
+import "echarts-liquidfill"; // 引入水球图插件
 
-const chartDom = ref(null)
+const chartDom = ref(null);
 
 function chartInit() {
-  const chart = echarts.init(chartDom.value)
+  const chart = echarts.init(chartDom.value);
   chart.setOption({
-    series: [{
-      type: 'liquidFill',
-      data: [0.5, 0.5, 0.44],
-      radius: '70%',
-    }]
-  })
+    series: [
+      {
+        type: "liquidFill",
+        data: [0.5, 0.5, 0.44],
+        radius: "70%",
+      },
+    ],
+  });
 }
 
 onMounted(() => {
-  chartInit()
-})
+  chartInit();
+});
 </script>
 
 <style lang="scss" scoped>

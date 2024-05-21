@@ -1,10 +1,7 @@
 <!-- 累计销售额 -->
 <template>
   <div>
-    <CommonCard
-      title="累计销售额"
-      value="￥32,039,165"
-    >
+    <CommonCard title="累计销售额" value="￥32,039,165">
       <template #default>
         <div class="compare__wrapper">
           <div class="compare">
@@ -28,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { CommonCard } from './commonCardMixin.js'
+import { CommonCard } from "./commonCardMixin.js";
 </script>
 
 <style lang="scss" scoped>

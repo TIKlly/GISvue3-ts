@@ -3,7 +3,9 @@
     <template #header>
       <div class="card__header">
         <div class="card__header__title">{{ title }}</div>
-        <div class="card__header__componentPath">组件位置：{{ componentPath }}</div>
+        <div class="card__header__componentPath">
+          组件位置：{{ componentPath }}
+        </div>
       </div>
     </template>
     <template #default>
@@ -13,17 +15,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 
-import { useUserStore } from "@/stroe/index.ts"
+import { useUserStore } from "@/stroe/index.ts";
 
-const route = useRoute()
-const store = useUserStore()
+const route = useRoute();
+const store = useUserStore();
 
-const title = computed(() => route.meta.navName)
+const title = computed(() => route.meta.navName);
 
-const componentPath = computed(() => store.getComponentPath)
+const componentPath = computed(() => store.getComponentPath);
 </script>
 
 <style lang="scss" scoped>
@@ -38,7 +40,12 @@ const componentPath = computed(() => store.getComponentPath)
     border-radius: 4px;
     line-height: 26px;
     color: #fff;
-    background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    background-image: linear-gradient(
+      -225deg,
+      #473b7b 0%,
+      #3584a7 51%,
+      #30d2be 100%
+    );
 
     &::selection {
       background: #d299c2;

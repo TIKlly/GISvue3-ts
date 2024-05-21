@@ -4,7 +4,11 @@
 
     <!-- 侧边栏（大屏幕布局） -->
     <el-aside width="180" v-if="!isMobile">
-      <RootNav :currentPath="currentPath" :routesList="routesList" :isCollapse="isMobile" />
+      <RootNav
+        :currentPath="currentPath"
+        :routesList="routesList"
+        :isCollapse="isMobile"
+      />
     </el-aside>
     <!-- 移动端显示 -->
     <!-- <el-drawer v-else direction="ltr" v-model="drawer" title="I am the title" :with-header="false">
@@ -14,7 +18,12 @@
     <el-container>
       <el-header>
         <RootHeader>
-          <el-button v-if="isMobile" class=" text-green-300" @click="toggle" :isMobile="isMobile">
+          <el-button
+            v-if="isMobile"
+            class="text-green-300"
+            @click="toggle"
+            :isMobile="isMobile"
+          >
             <el-icon>
               <Operation />
             </el-icon>
@@ -57,7 +66,6 @@ const routesList: any = computed(() => {
 // const refreshCurrentPage = (val: boolean) => (isRouterShow.value = val);
 // provide("refresh", refreshCurrentPage);
 
-
 onMounted(() => {
   handleResize();
   window.addEventListener("resize", handleResize);
@@ -74,8 +82,7 @@ const currentPath = computed(() => {
 
 // 切换是否显示 aside
 function toggle() {
-  isMobile.value = !isMobile.value
-
+  isMobile.value = !isMobile.value;
 }
 // 使用计算属性动态计算内容区域的内边距
 const contentPadding = computed(() => (isMobile.value ? "20px" : "40px"));

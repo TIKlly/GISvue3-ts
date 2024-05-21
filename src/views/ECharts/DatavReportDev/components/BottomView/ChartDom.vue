@@ -3,30 +3,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as echarts from 'echarts'
+import { ref, onMounted } from "vue";
+import * as echarts from "echarts";
 
 const props = defineProps({
   options: {
     type: Object,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
 // echart元素
-const chartDom = ref(null)
+const chartDom = ref(null);
 
 // 渲染函数
 function chartInit() {
   // 指定ECharts容器元素
-  const chart = echarts.init(chartDom.value) // 默认主题
+  const chart = echarts.init(chartDom.value); // 默认主题
   // 设置图表
-  chart.setOption(props.options)
+  chart.setOption(props.options);
 }
 
 onMounted(() => {
-  chartInit()
-})
+  chartInit();
+});
 </script>
 
 <style lang="scss" scoped>

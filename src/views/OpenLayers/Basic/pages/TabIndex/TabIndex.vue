@@ -14,37 +14,39 @@
  * @作者 羊一止
  * @本例讲解 https://juejin.cn/post/7008808627326681101/
  */
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   map.value = new Map({
-    target: 'map',
+    target: "map",
     layers: [
       new Tile({
-        source: new OSM()
-      })
+        source: new OSM(),
+      }),
     ],
     view: new View({
       projection: "EPSG:4326",
       center: [113.120444, 23.034742],
-      zoom: 12
-    })
-  })
+      zoom: 12,
+    }),
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/TabIndex/TabIndex.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/TabIndex/TabIndex.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

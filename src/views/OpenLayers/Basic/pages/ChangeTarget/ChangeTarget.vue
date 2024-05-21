@@ -12,48 +12,52 @@
  * @作者 羊一止
  * @本例讲解 https://juejin.cn/post/7010960895421448199
  */
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   // 地图实例
   map.value = new Map({
-    layers: [ // 图层
+    layers: [
+      // 图层
       new Tile({
-        source: new OSM() // 图层数据源
-      })
+        source: new OSM(), // 图层数据源
+      }),
     ],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326", // 坐标系，有EPSG:4326和EPSG:3857
       center: [19, 9.0], // 坐标
       minZoom: 10, // 地图缩放最小级别
-      zoom: 12 // 地图缩放级别（打开页面时默认级别）
-    })
-  })
+      zoom: 12, // 地图缩放级别（打开页面时默认级别）
+    }),
+  });
 
-  map.value.setTarget('map1') // 使用 setTarget 绑定地图容器
+  map.value.setTarget("map1"); // 使用 setTarget 绑定地图容器
 }
 
 function changeMap() {
   // 获取当前地图容器，并进行判断
-  let target = map.value?.getTarget() === 'map1' ? 'map2' : 'map1'
+  let target = map.value?.getTarget() === "map1" ? "map2" : "map1";
 
   // 重新设置地图容器
-  map.value?.setTarget(target)
+  map.value?.setTarget(target);
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/ChangeTarget/ChangeTarget.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/ChangeTarget/ChangeTarget.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

@@ -8,46 +8,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import { OSM, TileJSON } from 'ol/source'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import { OSM, TileJSON } from "ol/source";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
 function initMap() {
   map.value = new Map({
-    target: 'map',
+    target: "map",
     layers: [
       new Tile({
-        source: new OSM()
+        source: new OSM(),
       }),
       new Tile({
         source: new TileJSON({
-          url: 'https://api.tiles.mapbox.com/v4/mapbox.natural-earth-hypso-bathy.json?secure&access_token=pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiY2pzbmg0Nmk5MGF5NzQzbzRnbDNoeHJrbiJ9.7_-_gL8ur7ZtEiNwRfCy7Q',
-          crossOrigin: 'anonymous'
+          url: "https://api.tiles.mapbox.com/v4/mapbox.natural-earth-hypso-bathy.json?secure&access_token=pk.eyJ1IjoiYWhvY2V2YXIiLCJhIjoiY2pzbmg0Nmk5MGF5NzQzbzRnbDNoeHJrbiJ9.7_-_gL8ur7ZtEiNwRfCy7Q",
+          crossOrigin: "anonymous",
         }),
 
         // 当图层在 2000 至 20000 时显示
         minResolution: 2000,
-        maxResolution: 20000
-      })
+        maxResolution: 20000,
+      }),
     ],
     view: new View({
       center: [653600, 5723680],
-      zoom: 5
-    })
-  })
+      zoom: 5,
+    }),
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/SetResolution/SetResolution.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/SetResolution/SetResolution.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

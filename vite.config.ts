@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import path from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import path from "path";
 
 import pkg from "./package.json";
 import dayjs from "dayjs";
@@ -11,47 +11,42 @@ import dayjs from "dayjs";
 const { dependencies, devDependencies, name, version } = pkg;
 const __APP_INFO__ = {
   pkg: { dependencies, devDependencies, name, version },
-  lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss")
+  lastBuildTime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
 };
 export default defineConfig({
-  plugins: [vue(),
-  AutoImport({
-    resolvers: [
-      ElementPlusResolver(),
-    ],
-  }),
-  Components({
-    resolvers: [
-      ElementPlusResolver(),
-
-    ],
-    directoryAsNamespace: true,
-  }),
+  plugins: [
+    vue(),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+      directoryAsNamespace: true,
+    }),
   ],
-  base: './',//配合electron打包
+  base: "./", //配合electron打包
   resolve: {
-
     alias: { "@": path.resolve(__dirname, "src") },
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:3000',
+      "/api": {
+        target: "http://127.0.0.1:3000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      }
-    }
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "@/assets/style/variables.scss";` //这样就能引入了，但是如果不在根目录下，这样�
-
-      }
-    }
+        additionalData: `@import "@/assets/style/variables.scss";`, //这样就能引入了，但是如果不在根目录下，这样�
+        javascriptEnabled: true,
+      },
+    },
   },
   define: {
-    __APP_INFO__: JSON.stringify(__APP_INFO__)
+    __APP_INFO__: JSON.stringify(__APP_INFO__),
   },
   build: {
     outDir: "dist",
@@ -74,8 +69,8 @@ export default defineConfig({
         // Static resource classification and packaging
         chunkFileNames: "assets/js/[name]-[hash].js",
         entryFileNames: "assets/js/[name]-[hash].js",
-        assetFileNames: "assets/[ext]/[name]-[hash].[ext]"
-      }
-    }
-  }
-})
+        assetFileNames: "assets/[ext]/[name]-[hash].[ext]",
+      },
+    },
+  },
+});

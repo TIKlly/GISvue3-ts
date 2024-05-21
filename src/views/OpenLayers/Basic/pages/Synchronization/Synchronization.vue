@@ -13,54 +13,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import BingMaps from 'ol/source/BingMaps'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import BingMaps from "ol/source/BingMaps";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const mapO = ref<Map | undefined>(undefined)
-const mapB = ref<Map | undefined>(undefined)
+const mapO = ref<Map | undefined>(undefined);
+const mapB = ref<Map | undefined>(undefined);
 
 const mapView = new View({
   center: [0, 0],
-  zoom: 2
-})
+  zoom: 2,
+});
 
 const layerO = new Tile({
-  source: new OSM()
-})
+  source: new OSM(),
+});
 
 const layerB = new Tile({
   source: new BingMaps({
-    key: 'AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-',
-    imagerySet: 'Aerial'
-  })
-})
+    key: "AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-",
+    imagerySet: "Aerial",
+  }),
+});
 
 // 初始化
 function initMap() {
   mapO.value = new Map({
-    target: 'OSM',
+    target: "OSM",
     layers: [layerO],
-    view: mapView
-  })
+    view: mapView,
+  });
 
   mapB.value = new Map({
-    target: 'BingMaps',
+    target: "BingMaps",
     layers: [layerB],
-    view: mapView
-  })
+    view: mapView,
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/Synchronization/Synchronization.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/Synchronization/Synchronization.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -90,11 +92,11 @@ onMounted(() => {
   }
 
   #OSM::after {
-    content: 'OSM'
+    content: "OSM";
   }
 
   #BingMaps::after {
-    content: 'BingMap'
+    content: "BingMap";
   }
 }
 </style>

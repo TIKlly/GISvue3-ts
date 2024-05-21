@@ -4,47 +4,51 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import SourceVector from 'ol/source/Vector'
-import LayerVector from 'ol/layer/Vector'
-import GeoJSON from 'ol/format/GeoJSON'
-import CN from '@/assets/map/MapOfChina.json' // 矢量图（中国版）
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import SourceVector from "ol/source/Vector";
+import LayerVector from "ol/layer/Vector";
+import GeoJSON from "ol/format/GeoJSON";
+import CN from "@/assets/map/MapOfChina.json"; // 矢量图（中国版）
+import "ol/ol.css";
 
 // 矢量图数据生成网站：https://datav.aliyun.com/tools/atlas/index.html
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map>()
+const map = ref<Map>();
 
 function initMap() {
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ // 图层
+    target: "map", // 对应页面里 id 为 map 的元素
+    layers: [
+      // 图层
       new LayerVector({
         source: new SourceVector({
           features: new GeoJSON().readFeatures(CN, {
-            dataProjection: 'EPSG:4326',
-            featureProjection: "EPSG:4326"
-          })
-        })
-      })
+            dataProjection: "EPSG:4326",
+            featureProjection: "EPSG:4326",
+          }),
+        }),
+      }),
     ],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326", // 坐标系，有EPSG:4326和EPSG:3857
       center: [114.064839, 22.548857],
-      zoom: 3 // 地图缩放级别（打开页面时默认级别）
-    })
-  })
+      zoom: 3, // 地图缩放级别（打开页面时默认级别）
+    }),
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/VectorJSON/VectorJSON.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/VectorJSON/VectorJSON.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

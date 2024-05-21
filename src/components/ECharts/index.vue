@@ -3,7 +3,15 @@
 </template>
 
 <script setup lang="ts" name="ECharts">
-import { ref, onMounted, onBeforeUnmount, watch, computed, markRaw, nextTick } from "vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  computed,
+  markRaw,
+  nextTick,
+} from "vue";
 import { EChartsType, ECElementEvent } from "echarts/core";
 import echarts, { ECOption } from "./config";
 import { useDebounceFn } from "@vueuse/core";
@@ -22,7 +30,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   renderer: "canvas",
-  resize: true
+  resize: true,
 });
 
 const echartsStyle = computed(() => {
@@ -44,7 +52,8 @@ watch(props, () => {
   draw();
 });
 
-const handleClick = (event: ECElementEvent) => props.onClick && props.onClick(event);
+const handleClick = (event: ECElementEvent) =>
+  props.onClick && props.onClick(event);
 
 const init = () => {
   if (!chartRef.value) return;
@@ -53,8 +62,8 @@ const init = () => {
   if (!chartInstance.value) {
     chartInstance.value = markRaw(
       echarts.init(chartRef.value, props.theme, {
-        renderer: props.renderer
-      })
+        renderer: props.renderer,
+      }),
     );
     chartInstance.value.on("click", handleClick);
     draw();
@@ -77,7 +86,7 @@ watch(
   () => {
     debouncedResize();
   },
-  { deep: true }
+  { deep: true },
 );
 
 onMounted(() => {
@@ -93,6 +102,6 @@ onBeforeUnmount(() => {
 defineExpose({
   getInstance: () => chartInstance.value,
   resize,
-  draw
+  draw,
 });
 </script>

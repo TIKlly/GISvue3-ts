@@ -1,9 +1,9 @@
 export default function createCanvasAnimation() {
-  const appHome = document.getElementById('appHome') as HTMLElement;
-  const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d')!;
-  let canvasWidth = canvas.width = appHome.offsetWidth;
-  let canvasHeight = canvas.height = appHome.offsetHeight;
+  const appHome = document.getElementById("appHome") as HTMLElement;
+  const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+  const ctx = canvas.getContext("2d")!;
+  let canvasWidth = (canvas.width = appHome.offsetWidth);
+  let canvasHeight = (canvas.height = appHome.offsetHeight);
 
   let mouseX: number;
   let mouseY: number;
@@ -14,14 +14,21 @@ export default function createCanvasAnimation() {
     const diffX = mouseX - x;
     const diffY = mouseY - y;
 
-    return diffX < radius && diffX > -radius && diffY < radius && diffY > -radius;
+    return (
+      diffX < radius && diffX > -radius && diffY < radius && diffY > -radius
+    );
   };
 
   const randomNum = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  const changeSettings = (setting: number, min: number, max: number, prob: number) => {
+  const changeSettings = (
+    setting: number,
+    min: number,
+    max: number,
+    prob: number,
+  ) => {
     const chance = randomNum(0, prob);
 
     if (setting < min || chance === 1) {
@@ -55,11 +62,11 @@ export default function createCanvasAnimation() {
   const minSize = 5;
   const minSpeed = 5;
   const maxSpeed = 10;
-  const bgcolor = 'hsl(235,60%,13%)';
+  const bgcolor = "hsl(235,60%,13%)";
   const colors = [
-    { color1: '#fa4c2b', color2: '#6aff6e' },
-    { color1: '#ffff82', color2: '#ffce72' },
-    { color1: '#fa4c2b', color2: '#0bfcff' }
+    { color1: "#fa4c2b", color2: "#6aff6e" },
+    { color1: "#ffff82", color2: "#ffce72" },
+    { color1: "#fa4c2b", color2: "#0bfcff" },
   ];
 
   class BubbleClass implements Bubble {
@@ -74,7 +81,11 @@ export default function createCanvasAnimation() {
     directionY: number;
     flicker: number;
 
-    constructor(x: number = randomNum(0, canvasWidth), y: number = randomNum(0, canvasHeight), size: number = randomNum(minSize, maxSize)) {
+    constructor(
+      x: number = randomNum(0, canvasWidth),
+      y: number = randomNum(0, canvasHeight),
+      size: number = randomNum(minSize, maxSize),
+    ) {
       this.id = count + 1;
       this.x = x;
       this.y = y;
@@ -94,7 +105,11 @@ export default function createCanvasAnimation() {
       const popCount = this.radius / 10 > 0 ? this.radius / 10 : 2;
 
       for (let i = 0; i < popCount; i++) {
-        new BubbleClass(this.x, this.y, randomNum(this.radius / 4, this.radius / 2));
+        new BubbleClass(
+          this.x,
+          this.y,
+          randomNum(this.radius / 4, this.radius / 2),
+        );
       }
 
       this.radius = randomNum(this.radius / 4, this.radius / 2);
@@ -102,8 +117,10 @@ export default function createCanvasAnimation() {
     }
 
     draw() {
-      this.directionX = changeSettings(this.x, 0, canvasWidth, 500) || this.directionX;
-      this.directionY = changeSettings(this.y, 0, canvasHeight, 500) || this.directionY;
+      this.directionX =
+        changeSettings(this.x, 0, canvasWidth, 500) || this.directionX;
+      this.directionY =
+        changeSettings(this.y, 0, canvasHeight, 500) || this.directionY;
       this.speed = this.speedBackup;
 
       if (attract === true && mouseOver(this.x, this.y, 200)) {
@@ -122,13 +139,20 @@ export default function createCanvasAnimation() {
       this.radius += changeSettings(this.radius, minSize, maxSize, 15);
 
       ctx.save();
-      ctx.globalCompositeOperation = 'color-dodge';
+      ctx.globalCompositeOperation = "color-dodge";
       ctx.beginPath();
 
-      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+      const gradient = ctx.createRadialGradient(
+        this.x,
+        this.y,
+        0,
+        this.x,
+        this.y,
+        this.radius,
+      );
       gradient.addColorStop(0, this.color.color1);
       gradient.addColorStop(0.5, this.color.color2);
-      gradient.addColorStop(1, 'rgba(250,76,43,0)');
+      gradient.addColorStop(1, "rgba(250,76,43,0)");
 
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
       ctx.fillStyle = gradient;
@@ -161,11 +185,11 @@ export default function createCanvasAnimation() {
 
   requestAnimationFrame(animate);
 
-  canvas.addEventListener('click', (e) => {
+  canvas.addEventListener("click", (e) => {
     new BubbleClass(e.layerX, e.layerY);
   });
 
-  canvas.addEventListener('contextmenu', (e) => {
+  canvas.addEventListener("contextmenu", (e) => {
     mouseX = e.pageX;
     mouseY = e.pageY;
     pop = true;
@@ -174,31 +198,31 @@ export default function createCanvasAnimation() {
 
   let startAttracting: any;
 
-  canvas.addEventListener('mousedown', (e) => {
+  canvas.addEventListener("mousedown", (e) => {
     mouseX = e.pageX;
     mouseY = e.pageY;
 
     clearTimeout(startAttracting);
     startAttracting = setTimeout(() => {
-      return attract = true;
+      return (attract = true);
     }, 500);
   });
 
-  canvas.addEventListener('mousemove', (e) => {
+  canvas.addEventListener("mousemove", (e) => {
     if (attract) {
       mouseX = e.pageX;
       mouseY = e.pageY;
     }
   });
 
-  canvas.addEventListener('mouseup', () => {
+  canvas.addEventListener("mouseup", () => {
     clearTimeout(startAttracting);
     attract = false;
   });
 
   let resizing: any;
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     clearTimeout(resizing);
     resizing = setTimeout(() => {
       canvasWidth = canvas.width = appHome.offsetWidth;

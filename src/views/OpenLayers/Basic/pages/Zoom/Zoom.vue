@@ -17,67 +17,69 @@
  * @作者 羊一止
  * @本例讲解 https://juejin.cn/post/7008444700398977061
  */
-import { ref, computed, onMounted } from 'vue'
-import { useUserStore } from '@/stroe'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import OSM from 'ol/source/OSM'
-import 'ol/ol.css'
+import { ref, computed, onMounted } from "vue";
+import { useUserStore } from "@/stroe";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import OSM from "ol/source/OSM";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map = ref<Map | undefined>(undefined)
+const map = ref<Map | undefined>(undefined);
 
-const zoom = 12 // 初始化zoom
-const minZoom = 10 // 最小zoom
-const maxZoom = 14 // 最大zoom
+const zoom = 12; // 初始化zoom
+const minZoom = 10; // 最小zoom
+const maxZoom = 14; // 最大zoom
 
 // 初始化
 function initMap() {
   // 地图实例
   map.value = new Map({
-    target: 'map', // 对应页面里 id 为 map 的元素
-    layers: [ // 图层
+    target: "map", // 对应页面里 id 为 map 的元素
+    layers: [
+      // 图层
       new Tile({
-        source: new OSM() // 图层数据源
-      })
+        source: new OSM(), // 图层数据源
+      }),
     ],
-    view: new View({ // 地图视图
+    view: new View({
+      // 地图视图
       projection: "EPSG:4326", // 坐标系，有EPSG:4326和EPSG:3857
-      center: [110.20, 20.05], //坐标
+      center: [110.2, 20.05], //坐标
       zoom, // 地图缩放级别（打开页面时默认级别）
       minZoom, // 地图缩放最小级别
-      maxZoom // 地图缩放最大级别
-    })
-  })
+      maxZoom, // 地图缩放最大级别
+    }),
+  });
 }
 
 // 实时获取当前地图的 zoom
 const currentZoom = computed(() => {
   if (map.value) {
-    return map.value.getView().getZoom()
+    return map.value.getView().getZoom();
   }
-  return zoom
-})
+  return zoom;
+});
 
 // 放大1级
 function zoomIn() {
-  const view = map.value!.getView() // 获取当前视图
-  const zoom = view.getZoom() // 获取当前缩放级别
-  view.setZoom(zoom! + 1)
+  const view = map.value!.getView(); // 获取当前视图
+  const zoom = view.getZoom(); // 获取当前缩放级别
+  view.setZoom(zoom! + 1);
 }
 
 // 缩小1级
 function zoomOut() {
-  let view = map.value!.getView() // 获取当前视图
-  let zoom = view.getZoom() // 获取当前缩放级别
-  view.setZoom(zoom! - 1)
+  let view = map.value!.getView(); // 获取当前视图
+  let zoom = view.getZoom(); // 获取当前缩放级别
+  view.setZoom(zoom! - 1);
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/Zoom/Zoom.vue')
-  initMap()
-})
+  store.setComponentPath("src/views/OpenLayers/Basic/pages/Zoom/Zoom.vue");
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>

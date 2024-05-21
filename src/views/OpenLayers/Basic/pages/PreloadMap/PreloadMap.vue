@@ -13,60 +13,62 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useUserStore } from '@/stroe/index'
-import { Map, View } from 'ol'
-import Tile from 'ol/layer/Tile'
-import BingMaps from 'ol/source/BingMaps'
-import 'ol/ol.css'
+import { ref, onMounted } from "vue";
+import { useUserStore } from "@/stroe/index";
+import { Map, View } from "ol";
+import Tile from "ol/layer/Tile";
+import BingMaps from "ol/source/BingMaps";
+import "ol/ol.css";
 
-const store = useUserStore()
+const store = useUserStore();
 
-const map1 = ref<Map | undefined>(undefined)
-const map2 = ref<Map | undefined>(undefined)
+const map1 = ref<Map | undefined>(undefined);
+const map2 = ref<Map | undefined>(undefined);
 
 const mapView = new View({
   projection: "EPSG:4326",
   center: [114.064839, 22.548857],
-  zoom: 10
-})
+  zoom: 10,
+});
 
 function initMap() {
   // 初始化 map1
   map1.value = new Map({
-    target: 'map1',
+    target: "map1",
     layers: [
       new Tile({
         preload: Infinity, // 预加载
         source: new BingMaps({
-          key: 'AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-',
-          imagerySet: 'Aerial'
-        })
-      })
+          key: "AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-",
+          imagerySet: "Aerial",
+        }),
+      }),
     ],
-    view: mapView
-  })
+    view: mapView,
+  });
 
   // 初始化 map2
   map2.value = new Map({
-    target: 'map2',
+    target: "map2",
     layers: [
       new Tile({
         preload: 0, // 默认值
         source: new BingMaps({
-          key: 'AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-',
-          imagerySet: 'Aerial'
-        })
-      })
+          key: "AiZrfxUNMRpOOlCpcMkBPxMUSKOEzqGeJTcVKUrXBsUdQDXutUBFN3-GnMNSlso-",
+          imagerySet: "Aerial",
+        }),
+      }),
     ],
-    view: mapView
-  })
+    view: mapView,
+  });
 }
 
 onMounted(() => {
-  store.setComponentPath('src/views/OpenLayers/Basic/pages/PreloadMap/PreloadMap.vue')
-  initMap()
-})
+  store.setComponentPath(
+    "src/views/OpenLayers/Basic/pages/PreloadMap/PreloadMap.vue",
+  );
+  initMap();
+});
 </script>
 
 <style lang="scss" scoped>
@@ -90,10 +92,10 @@ onMounted(() => {
 }
 
 #map1::after {
-  content: '预加载'
+  content: "预加载";
 }
 
 #map2::after {
-  content: '默认'
+  content: "默认";
 }
 </style>

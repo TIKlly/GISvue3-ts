@@ -3,25 +3,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import * as echarts from 'echarts'
+import { ref, onMounted } from "vue";
+import * as echarts from "echarts";
 
 const props = defineProps({
-  options: Object
-})
+  options: Object,
+});
 
 // echart元素
-const chartDom = ref(null)
+const chartDom = ref(null);
 
 // 渲染函数
 function chartInit() {
-  const chart = echarts.init(chartDom.value)
-  chart.setOption(props.options as any)
+  const chart = echarts.init(chartDom.value);
+  chart.setOption(props.options as any);
 }
 
 onMounted(() => {
-  chartInit()
-})
+  chartInit();
+});
 </script>
 
 <style lang="scss" scoped></style>

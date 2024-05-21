@@ -40,14 +40,14 @@ export const useGlobalStore = defineStore({
     // 标签页图标
     tabsIcon: true,
     // 页脚
-    footer: true
+    footer: true,
   }),
   getters: {},
   actions: {
     // Set GlobalState
     setGlobalState(...args: ObjToKeyValArray<GlobalState>) {
       this.$patch({ [args[0]]: args[1] });
-    }
+    },
   },
-  persist: piniaPersistConfig("tik-global")
+  persist: piniaPersistConfig("tik-global"),
 });
