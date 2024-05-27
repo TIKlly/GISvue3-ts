@@ -5,25 +5,25 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import {
-  getUserDeviceModel,
-  getUserIP,
-  getUserLoginAddress,
-} from "@/util/checkIp.ts";
+  import { onMounted, ref } from 'vue'
+  import {
+    getUserDeviceModel,
+    getUserIP,
+    getUserLoginAddress
+  } from '@/util/checkIp.ts'
 
-const deviceModel = getUserDeviceModel();
-const Ip = ref();
-const Address = ref();
+  const deviceModel = getUserDeviceModel()
+  const Ip = ref()
+  const Address = ref()
 
-const handler = async () => {
-  Ip.value = await getUserIP();
-  Address.value = await getUserLoginAddress();
-};
+  const handler = async () => {
+    Ip.value = await getUserIP()
+    Address.value = await getUserLoginAddress()
+  }
 
-onMounted(() => {
-  handler();
-});
+  onMounted(() => {
+    handler()
+  })
 </script>
 
 <style lang="less" scoped></style>

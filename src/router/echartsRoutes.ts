@@ -1,57 +1,57 @@
 // echarts
 export default {
   // ECharts
-  path: "/eCharts",
-  name: "ECharts",
-  component: () => import("@/views/ECharts/index.vue"),
+  path: '/eCharts',
+  name: 'ECharts',
+  component: () => import('@/views/ECharts/index.vue'),
   meta: {
     navState: true,
-    navName: "ECharts",
-    icon: "MessageBox",
+    navName: 'ECharts',
+    icon: 'MessageBox'
   },
   children: [
     {
-      path: "/echarts-basic",
-      name: "EChartsBasic",
-      component: () => import("@/views/ECharts/Basic/index.vue"),
+      path: '/echarts-basic',
+      name: 'EChartsBasic',
+      component: () => import('@/views/ECharts/Basic/index.vue'),
       meta: {
         navState: true,
-        navName: "基础",
+        navName: '基础'
       },
       children: [
         {
-          path: "/ECharts-Stated",
-          name: "EChartsStated",
+          path: '/ECharts-Stated',
+          name: 'EChartsStated',
           component: () =>
-            import("@/views/ECharts/Basic/pages/Stated/Stated.vue"),
+            import('@/views/ECharts/Basic/pages/Stated/Stated.vue'),
           meta: {
             navState: true,
-            navName: "起步",
-          },
+            navName: '起步'
+          }
         },
         {
-          path: "/ECharts-GradientStacked",
-          name: "GradientStacked",
+          path: '/ECharts-GradientStacked',
+          name: 'GradientStacked',
           component: () =>
             import(
-              "@/views/ECharts/Basic/pages/GradientStackedAreaChart/GradientStacked.vue"
+              '@/views/ECharts/Basic/pages/GradientStackedAreaChart/GradientStacked.vue'
             ),
           meta: {
             navState: true,
-            navName: "渐变堆叠面积图",
-          },
+            navName: '渐变堆叠面积图'
+          }
         },
         {
-          path: "/ECharts-ThemeBuilderJS",
-          name: "EChartsThemeBuilderJS",
+          path: '/ECharts-ThemeBuilderJS',
+          name: 'EChartsThemeBuilderJS',
           component: () =>
             import(
-              "@/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJS.vue"
+              '@/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJS.vue'
             ),
           meta: {
             navState: true,
-            navName: "自定义主题 JS版",
-          },
+            navName: '自定义主题 JS版'
+          }
         },
         // {
         //     path: '/ECharts-ThemeBuilderJSON',
@@ -90,33 +90,35 @@ export default {
         //     }
         // },
         {
-          path: "/ECharts-Absolute",
-          name: "EChartsAbsolute",
+          path: '/ECharts-Absolute',
+          name: 'EChartsAbsolute',
           component: () =>
-            import("@/views/ECharts/Basic/pages/Absolute/Absolute.vue"),
+            import('@/views/ECharts/Basic/pages/Absolute/Absolute.vue'),
           meta: {
             navState: true,
-            navName: "定位",
-          },
+            navName: '定位'
+          }
         },
-        // {
-        //     path: '/ECharts-Scatter',
-        //     name: 'EChartsScatter',
-        //     component: () => import('@/views/ECharts/Basic/pages/Axis/Scatter.vue'),
-        //     meta: {
-        //         navState: true,
-        //         navName: '坐标系 - 散点图'
-        //     }
-        // },
-        // {
-        //     path: '/ECharts-Double',
-        //     name: 'EChartsDouble',
-        //     component: () => import('@/views/ECharts/Basic/pages/Axis/Double.vue'),
-        //     meta: {
-        //         navState: true,
-        //         navName: '坐标系 - 双坐标系'
-        //     }
-        // },
+        {
+          path: '/ECharts-Scatter',
+          name: 'EChartsScatter',
+          component: () =>
+            import('@/views/ECharts/Basic/pages/Axis/Scatter.vue'),
+          meta: {
+            navState: true,
+            navName: '坐标系 - 散点图'
+          }
+        },
+        {
+          path: '/ECharts-Double',
+          name: 'EChartsDouble',
+          component: () =>
+            import('@/views/ECharts/Basic/pages/Axis/Double.vue'),
+          meta: {
+            navState: true,
+            navName: '坐标系 - 双坐标系'
+          }
+        }
         // {
         //     path: '/ECharts-More',
         //     name: 'EChartsMore',
@@ -198,7 +200,7 @@ export default {
         //         navName: "datavreportDev"
         //     }
         // }
-      ],
-    },
-  ],
-};
+      ]
+    }
+  ]
+}
