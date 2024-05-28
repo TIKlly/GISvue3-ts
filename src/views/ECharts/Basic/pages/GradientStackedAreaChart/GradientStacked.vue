@@ -1,14 +1,16 @@
 <template>
-  <div id="chart" class="w-ful h-[600px] min-w-[600px]" ref="chartDom"></div>
+  <div
+    id="chart"
+    class="w-ful min-h-[400px] min-w-[300px]"
+    ref="chartDom"
+  ></div>
 </template>
 
 <script setup lang="ts">
   import * as echarts from 'echarts'
-  import { ref, onMounted, onUnmounted } from 'vue'
+  import { useECharts } from '@/hooks/initchart/useECharts'
 
-  const chartDom = ref()
-
-  const option = {
+  const option: echarts.EChartsOption = {
     color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
     title: {
       text: 'Gradient Stacked Area Chart'
@@ -192,29 +194,8 @@
   }
 
   // 渲染函数
-  const chartInit = () => {
-    // 指定ECharts容器元素
-    // const chart = echarts.init(chartDom.value) // 默认主题
-    const chart = echarts.init(chartDom.value, 'dark') // 深色主题
-    // 设置图表
-    chart.setOption(option)
-  }
 
-  // 窗口大小变化时重新渲染图表
-  const resizeChart = () => {
-    if (chartDom.value) {
-      echarts.getInstanceByDom(chartDom.value)?.resize()
-    }
-  }
-
-  onMounted(() => {
-    chartInit()
-    window.addEventListener('resize', resizeChart) // 监听窗口大小变化
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', resizeChart) // 移除窗口大小变化监听
-  })
+  const { chartDom } = useECharts(option)
 </script>
 
 <style lang="sass" scoped></style>

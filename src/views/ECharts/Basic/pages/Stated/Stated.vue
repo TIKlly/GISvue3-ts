@@ -1,6 +1,10 @@
 <!-- ECharts - 起步 -->
 <template>
-  <div id="chart" class="chart" ref="chartDom"></div>
+  <div
+    id="chart"
+    class="w-ful h-full min-h-[600px] min-w-[300px]"
+    ref="chartDom"
+  ></div>
 
   <div v-highlight>
     <h2>useECharts hooks 封装</h2>
@@ -9,11 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue'
-  import * as echarts from 'echarts'
-  // 代码高亮
-  // import hljs from 'highlight.js'
-  // import 'highlight.js/styles/tomorrow-night.css'
+  import { onMounted } from 'vue'
+  import { useECharts } from '@/hooks/initchart/useECharts'
   const code = `
 import { ref, onMounted, onUnmounted, Ref } from 'vue'
 import * as echarts from 'echarts'
@@ -56,19 +57,12 @@ export function useECharts(option: EChartsOption, theme: string = 'dark') {
   }
 }
 `
-  // const highlightCode = () => {
-  //   nextTick(() => {
-  //     hljs.highlightBlock(refs.code)
-  //   })
-  // }
   import { useUserStore } from '@/stroe/index.ts'
   const store = useUserStore()
-
   // echart元素
-  const chartDom = ref(null)
 
   // 数据和配置项
-  const option = {
+  const option: echarts.EChartsOption = {
     title: {
       text: '起步'
     },
@@ -87,18 +81,9 @@ export function useECharts(option: EChartsOption, theme: string = 'dark') {
     }
   }
 
-  // 渲染函数
-  function chartInit() {
-    // 指定ECharts容器元素
-    // const chart = echarts.init(chartDom.value) // 默认主题
-    const chart = echarts.init(chartDom.value, 'dark') // 深色主题
-    // 设置图表
-    chart.setOption(option)
-  }
-
+  const { chartDom } = useECharts(option)
   onMounted(() => {
     store.setComponentPath('src/views/ECharts/Basic/pages/Stated/Stated.vue')
-    chartInit()
   })
 </script>
 

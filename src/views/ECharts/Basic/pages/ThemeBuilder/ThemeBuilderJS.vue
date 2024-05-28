@@ -1,6 +1,10 @@
 <!-- ECharts - 自定义主题JS版 -->
 <template>
-  <div id="chart" class="chart" ref="chartDom"></div>
+  <div
+    id="chart"
+    class="w-ful h-full min-h-[500px] min-w-[300px]"
+    ref="chartDom"
+  ></div>
   <aside>
     <p>自定义echarts主题说明：</p>
     <p>
@@ -30,55 +34,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import * as echarts from "echarts";
-import { useUserStore } from "@/stroe";
+  import { onMounted } from 'vue'
+  import * as echarts from 'echarts'
+  import { useUserStore } from '@/stroe'
+  import { useECharts } from '@/hooks/initchart/useECharts'
 
-const store = useUserStore();
+  const store = useUserStore()
 
-// echart元素
-const chartDom = ref(null);
+  // echart元素
 
-// 数据和配置项
-const option = {
-  title: {
-    text: "自定义主题 JS版",
-  },
-  xAxis: {
-    // x轴
-    data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
-  },
-  yAxis: {
-    // y轴
-  },
-  series: {
-    // 图表类型
-    name: "销量",
-    type: "bar",
-    data: [5, 20, 36, 10, 10, 20],
-  },
-};
+  // 数据和配置项
+  const option: echarts.EChartsOption = {
+    title: {
+      text: '自定义主题 JS版'
+    },
+    xAxis: {
+      // x轴
+      data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+    },
+    yAxis: {
+      // y轴
+    },
+    series: {
+      // 图表类型
+      name: '销量',
+      type: 'bar',
+      data: [5, 20, 36, 10, 10, 20]
+    }
+  }
 
-// 渲染函数
-function chartInit() {
-  // 指定ECharts容器元素
-  // const chart = echarts.init(chartDom.value) // 默认主题
-  const chart = echarts.init(chartDom.value, "vintage2"); // 深色主题
-  // 设置图表
-  chart.setOption(option);
-}
+  // 渲染函数
+  const { chartDom } = useECharts(option)
 
-onMounted(() => {
-  store.setComponentPath(
-    "src/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJS.vue",
-  );
-  chartInit();
-});
+  onMounted(() => {
+    store.setComponentPath(
+      'src/views/ECharts/Basic/pages/ThemeBuilder/ThemeBuilderJS.vue'
+    )
+  })
 </script>
 
 <style lang="scss" scoped>
-.chart {
-  width: 800px;
-  height: 400px;
-}
+  .chart {
+    width: 800px;
+    height: 400px;
+  }
 </style>

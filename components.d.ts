@@ -30,6 +30,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     ElUpload: typeof import('element-plus/es')['ElUpload']
+    Hightcode: typeof import('./src/components/Hightcode.vue')['default']
     RootRootHeader: typeof import('./src/components/Root/RootHeader.vue')['default']
     RootRootNav: typeof import('./src/components/Root/RootNav.vue')['default']
     RootRootNavList: typeof import('./src/components/Root/RootNavList.vue')['default']
