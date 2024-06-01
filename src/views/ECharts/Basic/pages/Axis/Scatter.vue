@@ -2,7 +2,7 @@
   <!-- 主题切换 -->
   <div
     id="chart"
-    class="w-ful h-full min-h-[600px] min-w-[600px]"
+    class="w-ful h-full min-h-[600px] min-w-[300px]"
     ref="chartDom"
   ></div>
 </template>

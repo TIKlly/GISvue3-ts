@@ -1,167 +1,92 @@
 <template>
   <div class="canvas-container" ref="containerRef">
-    <canvas class="canvas" ref="canvasRef"></canvas>
+    <canvas width="800" height="600" ref="canvasRef"></canvas>
   </div>
+
+  <div></div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
-import { useUserStore } from "@/stroe";
+  import { onMounted, ref } from 'vue'
+  const canvasRef = ref<HTMLCanvasElement | null>(null)
+  const initCanvas = () => {
+    const canvas = canvasRef.value!
+    const ctx = canvas.getContext('2d')!
+    // 绘制一条线
+    ctx.beginPath()
+    ctx.moveTo(50, 50) //起点
+    ctx.lineTo(100, 50) //终点
+    ctx.stroke() // 描边
 
-const stroe = useUserStore();
+    // 三角形
+    ctx.beginPath()
+    ctx.moveTo(100, 100)
+    ctx.lineTo(100, 200)
+    ctx.lineTo(200, 200)
+    ctx.lineTo(100, 100)
+    ctx.stroke()
+    // 正方形
+    ctx.beginPath()
+    ctx.moveTo(200, 200)
+    ctx.lineTo(400, 200)
+    ctx.lineTo(400, 400)
+    ctx.lineTo(200, 400)
+    ctx.closePath()
+    ctx.stroke()
+    // 正方形的另一种写法
 
-const containerRef = ref<HTMLElement | null>(null);
-const canvasRef = ref<HTMLCanvasElement | null>(null);
-let canvasWidth = 0;
-let canvasHeight = 0;
-let ctx: CanvasRenderingContext2D | null = null;
-const lines: Line[] = [];
+    // 颜色填充
+    ctx.beginPath()
+    ctx.fillStyle = 'blue'
+    ctx.strokeStyle = 'red'
+    ctx.moveTo(300, 50)
+    ctx.lineTo(350, 50)
+    ctx.lineTo(350, 100)
+    ctx.lineTo(300, 100)
+    ctx.fill() // 填充
+    ctx.closePath()
+    ctx.stroke() // 绘线
 
-interface Line {
-  [x: string]: /* __placeholder__ */
-  any;
-  x: number;
-  y: number;
-  length: number;
-  speed: number;
-  directionX: number;
-  directionY: number;
-  color: CanvasGradient;
-}
+    // 折线
+    ctx.beginPath()
+    ctx.moveTo(400, 50)
+    ctx.lineTo(500, 100)
+    ctx.lineTo(650, 50)
+    ctx.lineTo(750, 200)
+    ctx.stroke()
 
-const createCanvasAnimation = () => {
-  if (!containerRef.value || !canvasRef.value) return;
-  const canvas = canvasRef.value;
-  ctx = canvas.getContext("2d");
-  if (!ctx) return;
+    // 弧线
+    ctx.beginPath()
+    ctx.arc(400, 400, 50, (Math.PI / 180) * 0, (Math.PI / 180) * 90, false)
+    ctx.stroke()
 
-  canvasWidth = canvas.width = containerRef.value.offsetWidth;
-  canvasHeight = canvas.height = containerRef.value.offsetHeight;
+    // 介于两点之间的弧
 
-  const randomNum = (min: number, max: number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+    ctx.beginPath()
+    ctx.moveTo(500, 50)
+    ctx.arcTo(600, 50, 600, 100, 50)
+    ctx.lineTo(600, 400)
+    ctx.stroke()
 
-  const createGradient = () => {
-    const gradient = ctx!.createLinearGradient(0, 0, canvasWidth, canvasHeight);
-    gradient.addColorStop(
-      0,
-      `rgba(${randomNum(0, 255)}, ${randomNum(0, 255)}, ${randomNum(0, 255)}, 1)`,
-    );
-    gradient.addColorStop(
-      1,
-      `rgba(${randomNum(0, 255)}, ${randomNum(0, 255)}, ${randomNum(0, 255)}, 1)`,
-    );
-    return gradient;
-  };
-
-  class LineClass implements Line {
-    x: number;
-    y: number;
-    length: number;
-    speed: number;
-    directionX: number;
-    directionY: number;
-    color: CanvasGradient;
-
-    constructor(
-      x: number,
-      y: number,
-      length: number,
-      speed: number,
-      directionX: number,
-      directionY: number,
-      color: CanvasGradient,
-    ) {
-      this.x = x;
-      this.y = y;
-      this.length = length;
-      this.speed = speed;
-      this.directionX = directionX;
-      this.directionY = directionY;
-      this.color = color;
-    }
-
-    draw() {
-      this.x += this.speed * this.directionX;
-      this.y += this.speed * this.directionY;
-
-      if (this.x > canvasWidth || this.x < 0) {
-        this.directionX = -this.directionX;
-        this.color = createGradient();
-      }
-      if (this.y > canvasHeight || this.y < 0) {
-        this.directionY = -this.directionY;
-        this.color = createGradient();
-      }
-
-      ctx!.beginPath();
-      ctx!.moveTo(this.x, this.y);
-      ctx!.lineTo(
-        this.x + this.length * this.directionX,
-        this.y + this.length * this.directionY,
-      );
-      ctx!.strokeStyle = this.color;
-      ctx!.lineWidth = 2;
-      ctx!.stroke();
-      ctx!.closePath();
-    }
+    // 圆
   }
 
-  const lineCount = 20;
-  const maxLineLength = 300;
-  const minLineLength = 100;
-  const minSpeed = 1;
-  const maxSpeed = 5;
-
-  // Create initial lines
-  for (let i = 0; i < lineCount; i++) {
-    const x = randomNum(0, canvasWidth);
-    const y = randomNum(0, canvasHeight);
-    const length = randomNum(minLineLength, maxLineLength);
-    const speed = randomNum(minSpeed, maxSpeed) / 10;
-    const directionX = randomNum(-1, 1) || 1;
-    const directionY = randomNum(-1, 1) || 1;
-    const color = createGradient();
-    lines.push(
-      new LineClass(x, y, length, speed, directionX, directionY, color),
-    );
-  }
-
-  const animate = () => {
-    if (!ctx) return;
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-    for (const line of lines) {
-      line.draw();
-    }
-
-    requestAnimationFrame(animate);
-  };
-
-  requestAnimationFrame(animate);
-};
-
-onMounted(() => {
-  createCanvasAnimation();
-  stroe.setComponentPath("src/views/Canvas/Demo/pages/Bubble/Bubble.vue");
-});
-
-onUnmounted(() => {
-  // Clean up any resources if needed
-});
+  onMounted(() => {
+    initCanvas()
+  })
 </script>
 
 <style scoped>
-.canvas-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.canvas {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-}
+  .canvas-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border: 1px solid #000;
+  }
+  /* css 会拉伸canvas */
+  .canvas {
+    width: 100%;
+    height: 100%;
+    /* background-color: #000; */
+  }
 </style>

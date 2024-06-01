@@ -1,28 +1,34 @@
 <template>
   <div>
-    <div class="mb-32">
-      <h3>for example</h3>
-      <div class="flex gap-6 max-md:flex-col">
-        <img width="500" src="@/assets/images/nfs.jpg" alt="" srcset="" />
-        <img width="500" src="@/assets/images/cnfs.jpg" alt="" srcset="" />
+    <div>
+      <div class="mb-32">
+        <h3>for example</h3>
+        <div class="flex gap-6 max-md:flex-col">
+          <img width="500" src="@/assets/images/nfs.jpg" alt="" srcset="" />
+          <img width="500" src="@/assets/images/cnfs.jpg" alt="" srcset="" />
+        </div>
       </div>
+      <!--  @vue-ignore -->
+      <input type="file" @change="uploadFile" />
+      <img
+        width="500"
+        v-if="processedImage"
+        :src="processedImage"
+        alt="Processed Image"
+      />
     </div>
-    <input type="file" @change="uploadFile" />
-    <img v-if="processedImage" :src="processedImage" alt="Processed Image" />
+    <Hightcode :code="code"></Hightcode>
   </div>
-
-  <Hightcode :code="code"></Hightcode>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { ref } from 'vue'
   import Hightcode from '@/components/Hightcode.vue'
-  const processedImage = ref(null)
-  const uploadFile = async (event) => {
+  const processedImage = ref<string>('')
+  const uploadFile = async (event: { target: { files: any[] } }) => {
     const file = event.target.files[0]
     const formData = new FormData()
     formData.append('image', file)
-
     const response = await fetch('http://localhost:5000/process_image', {
       method: 'POST',
       body: formData
@@ -31,7 +37,7 @@
     processedImage.value = `data:image/jpeg;base64,${data.gray_image}`
   }
 
-  const code = `
+  const code: string = `
 # 后端代码  转换灰度图像  后端未上线部署 :(  请自行测试
 # app.py
 from flask import Flask, request, jsonify
